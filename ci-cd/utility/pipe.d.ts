@@ -47,7 +47,7 @@ declare class Pipe implements Subprocess {
      *
      */
     spawn(): {
-        error: Error | undefined;
+        error: Error;
         input: string;
         output: string[];
     };
@@ -64,7 +64,7 @@ declare class Pipe implements Subprocess {
      *
      */
     static run: (application: string, parameters: string[]) => {
-        error: Error | undefined;
+        error: Error;
         input: string;
         output: string[];
     };

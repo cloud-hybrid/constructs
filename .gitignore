@@ -64,4 +64,10 @@ tf/**/.terraform.lock.hcl
 .gitlab-url
 .gitlab-username
 
+*.js
+*.js.map
+
+*.d.ts
+*.d.ts.map
+
 ci

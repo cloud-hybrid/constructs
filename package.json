@@ -1,7 +1,7 @@
 {
     "name": "@cloud-technology/constructs",
     "private": false,
-    "version": "0.5.127",
+    "version": "0.5.131",
     "type": "module",
     "types": "index.d.ts",
     "main": "index.js",
@@ -13,7 +13,12 @@
         "build": "tsc --pretty",
         "compile": "tsc --watch",
         "upload": "npm publish --access public",
-        "upgrade": "npm i cdktf@latest cdktf-cli@latest"
+        "upgrade": "npm i cdktf@latest cdktf-cli@latest",
+        "rm-declarations": "find . -name '*.d.ts' -type f -delete",
+        "rm-declaration-maps": "find . -name '*.d.ts.map' -type f -delete",
+        "rm-maps": "find . -name '*.js.map' -type f -delete",
+        "rm-compilations": "find . -name '*.js' -type f -delete",
+        "clean": "npm run rm-declarations && npm run rm-declaration-maps && npm run rm-maps && npm run rm-compilations"
     },
     "peerDependencies": {
         "typescript": "^4.5.5"

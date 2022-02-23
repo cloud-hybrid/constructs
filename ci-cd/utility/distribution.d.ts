@@ -7,27 +7,19 @@ import FS from "fs";
  * class also establishes the ability to exclude nested file descriptors
  * (a folder or file) when calling its constructor.
  */
-declare class Walker {
+declare class Distribution {
+    readonly debug: boolean;
+    readonly directory: string;
+    readonly home: string;
+    /*** Current Module Directory */
+    protected static readonly CWD: string;
+    /*** Current Module Working Directory */
+    protected static readonly MWD: string;
+    /*** Current Package's Working Directory */
+    protected static readonly PWD: string;
+    /*** Compatability Wrapper around Node.js's `require` */
+    protected static readonly Import: NodeRequire;
     /***
-     * Asynchronous, promise-based wrapper around `import("fs").rm` utility function.
-     *
-     * @internal
-     * @private
-     *
-     */
-    private static Remove;
-    /*** Target-level directories to avoid copying into distribution */
-    ignore: string[];
-    /*** Debug parameter used during the various class-instance namespace'd callables */
-    debug: boolean;
-    /*** The target directory for the distribution */
-    target: string | FS.PathLike;
-    files: string[];
-    compilations: string[];
-    directory: any;
-    /***
-     *
-     * @param {string[]} undesired - Target-level directories to avoid copying into distribution
      *
      * @param target {string} - Target Directory for Distribution
      * @param debug {boolean} - Debug Parameter
@@ -35,7 +27,30 @@ declare class Walker {
      * @constructs
      *
      */
-    constructor(target: string, undesired?: string[], debug?: boolean);
+    constructor(target: string, debug?: boolean);
+    /***
+     * Asynchronous, promise-based wrapper around `import("fs").writeFile` utility function.
+     *
+     * @type {
+     *      (
+     *           path: (string | Buffer | URL | number),
+     *           data: (string | Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Int8Array | Int16Array | Int32Array | BigUint64Array | BigInt64Array | Float32Array | Float64Array | DataView)
+     *      ) => Promise<?>
+     * }
+     *
+     * @internal
+     * @private
+     *
+     */
+    protected static write: (path: (string | Buffer | URL | number), data: (string | Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Int8Array | Int16Array | Int32Array | BigUint64Array | BigInt64Array | Float32Array | Float64Array | DataView)) => Promise<void>;
+    /***
+     * Asynchronous, promise-based wrapper around `import("fs").rm` utility function.
+     *
+     * @internal
+     * @private
+     *
+     */
+    protected static remove: (path: FS.PathLike, options?: (FS.RmOptions | undefined)) => Promise<void>;
     /***
      * Asynchronous implementation of `FS.rm`, wrapped with Node.js's Promisify
      * utility.
@@ -47,7 +62,7 @@ declare class Walker {
      * @constructor
      *
      */
-    static remove(path: (string), retries: number, force: boolean, recursive: boolean): Promise<void>;
+    static delete(path: (string), retries: number, force: boolean, recursive: boolean): Promise<void>;
     /***
      * Asynchronously, Recursively, Validate & Establish a Directory
      * ---
@@ -65,22 +80,6 @@ declare class Walker {
      */
     static directory(path: string): Promise<(Promise<string | boolean> | string)[]>;
     /***
-     * Recursive Copy Function
-     *
-     * *Note* - the following function is recursive, and will perform *actual, real copies*; symbolic
-     * links are resolved to their raw pointer location(s).
-     *
-     * Hoisted package linking is damaging, and is an important considerations especially when
-     * building for reproducible distributions.
-     *
-     * @param source {string} Original path
-     * @param target {string} Target copy destination
-     *
-     * @constructor
-     *
-     */
-    copy(source: string, target: string): void;
-    /***
      * Shallow Copy
      *
      * Specifying a target directory to copy into, `shallow` will parse the
@@ -95,7 +94,6 @@ declare class Walker {
      *
      */
     static shallow(source: string, target: string): void;
-    accumulate(target: string): void;
 }
-export { Walker };
-export default Walker;
+export { Distribution };
+export default Distribution;

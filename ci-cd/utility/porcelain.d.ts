@@ -1,7 +1,7 @@
 /// <reference types="node" />
 import FS from "fs";
 /***
- * Porcelain is a abstraction around `git`'s `git-status` command
+ * Porcelain is an abstraction around `git`'s `git-status` command
  *
  * The class's primary use-case includes validating an entire
  * repository's status - assigning a `dirty` property if
@@ -25,9 +25,32 @@ declare class Porcelain {
     readonly abi: string;
     readonly arguments: string[];
     dirty?: boolean;
+    clean?: boolean;
     output?: Mutations;
     static readonly command: [string, string[]];
     constructor(repository?: string | FS.PathLike | FS.PathOrFileDescriptor);
+    /***
+     * Porcelain - `git-status` abstraction
+     * ---
+     *
+     * The class's primary use-case includes validating an entire
+     * repository's status - assigning a `dirty` property if
+     * any uncommitted, unsaved modifications are found.
+     *
+     * Other modules can compose the `Porcelain` class to determine whether
+     * file-system modifications should be made the repository, or any of its
+     * descendents.
+     *
+     * @example
+     * console.log(Porcelain.check());
+     *
+     * @example
+     * console.log(Porcelain.check("~/repository-example"));
+     *
+     * @see {@link https://git-scm.com/docs/git-status|Official Documentation Page(s)}
+     *
+     */
+    static check(): Porcelain;
     /***
      * A function compositional around the `Pipe` class constructor
      * - Reference below for additional details
