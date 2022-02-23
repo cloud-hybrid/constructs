@@ -1,7 +1,7 @@
 {
     "name": "@cloud-technology/constructs",
     "private": false,
-    "version": "0.5.131",
+    "version": "0.5.132",
     "type": "module",
     "types": "index.d.ts",
     "main": "index.js",
@@ -18,7 +18,8 @@
         "rm-declaration-maps": "find . -name '*.d.ts.map' -type f -delete",
         "rm-maps": "find . -name '*.js.map' -type f -delete",
         "rm-compilations": "find . -name '*.js' -type f -delete",
-        "clean": "npm run rm-declarations && npm run rm-declaration-maps && npm run rm-maps && npm run rm-compilations"
+        "rm-modules": "rm -rf node_modules",
+        "clean": "npm run rm-declarations && npm run rm-declaration-maps && npm run rm-maps && npm run rm-compilations && npm run rm-modules"
     },
     "peerDependencies": {
         "typescript": "^4.5.5"
