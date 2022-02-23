@@ -1,5 +1,5 @@
 {
-    "name": "ssm-parameter",
+    "name": "s3-bucket",
     "private": true,
     "version": "1.0.0",
     "type": "module",

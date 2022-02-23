@@ -4,11 +4,16 @@ class Infrastructure extends Stack {
     constructor( scope: Construct, name: string, settings: Settings ) {
         super( scope, name, settings );
 
-        const bucket = new AWS.s3.S3Bucket( this, "s3-bucket", {
-            bucket: "demonstration-cdktf-generated-bucket"
+        const parameter = new AWS.s3.S3Bucket( this, "demonstration-cdktf-generated-ssm-parameter", {
+            dataType: "text",
+            overwrite: true,
+            name: "/Organization/Development/CDK-TF/Example/Value",
+            type: "String",
+            value: "Value"
         } );
-        const state: State = new Store( this, "demonstration-cdktf-generated-bucket-state", {
-            value: bucket
+
+        const state: State = new Store( this, "demonstration-cdktf-generated-ssm-parameter-state", {
+            value: parameter
         } );
 
         ( process.env?.debug ) && console.log( state );
