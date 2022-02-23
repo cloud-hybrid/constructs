@@ -1,0 +1,14 @@
+{
+    "language": "typescript",
+    "app": "node --es-module-specifier-resolution node .",
+    "terraformModules": [],
+    "terraformProviders": [
+        "aws@~>4.2.0"
+    ],
+    "output": "distribution",
+    "context": {
+        "allowSepCharsInLogicalIds": "true",
+        "excludeStackIdFromLogicalIds": "true"
+    },
+    "codeMakerOutput": "./src/constructs/compilation"
+}

@@ -1,0 +1,85 @@
+{
+    "name": "@cloud-technology/constructs",
+    "private": false,
+    "version": "0.5.126",
+    "type": "module",
+    "types": "index.d.ts",
+    "main": "index.js",
+    "description": "Cloud Construct Package + Utilities",
+    "license": "BSD-2-Clause",
+    "author": "Jacob B. Sanders",
+    "scripts": {
+        "get": "cdktf get",
+        "build": "tsc --pretty",
+        "compile": "tsc --watch",
+        "upload": "npm publish --access public",
+        "upgrade": "npm i cdktf@latest cdktf-cli@latest"
+    },
+    "peerDependencies": {
+        "typescript": "^4.5.5"
+    },
+    "dependencies": {
+        "@cloud-technology/parameter": "^0.7.139",
+        "@cloud-technology/secrets-manager": "^0.6.136",
+        "@cloud-technology/secrets-manager-client": "^0.2.14",
+        "cdktf": "0.9.2",
+        "cdktf-cli": "0.9.2",
+        "chalk": "^5.0.0",
+        "constructs": "^10.0.69",
+        "dotenv": "^16.0.0",
+        "dotenv-expand": "^8.0.1",
+        "inquirer": "^8.2.0",
+        "source-map-support": "^0.5.21",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "@types/inquirer": "^8.2.0",
+        "@types/node": "^17.0.19",
+        "@types/source-map-support": "^0.5.4",
+        "@types/uuid": "^8.3.4",
+        "@typescript-eslint/eslint-plugin": "^5.12.1",
+        "@typescript-eslint/parser": "^5.12.1",
+        "@typescript-eslint/utils": "^5.12.1",
+        "eslint": "^8.9.0",
+        "regenerator-runtime": "^0.13.9",
+        "tsconfig-paths": "^3.12.0",
+        "typescript": "^4.5.5",
+        "typescript-eslint-language-service": "^5.0.0"
+    },
+    "eslintConfig": {
+        "parser": "@typescript-eslint/parser",
+        "plugins": [
+            "@typescript-eslint"
+        ],
+        "extends": [
+            "eslint:recommended",
+            "plugin:@typescript-eslint/eslint-recommended",
+            "plugin:@typescript-eslint/recommended"
+        ],
+        "rules": {
+            "no-case-declarations": 0,
+            "@typescript-eslint/no-explicit-any": 0,
+            "@typescript-eslint/explicit-function-return-type": 0,
+            "@typescript-eslint/no-use-before-define": 0,
+            "@typescript-eslint/no-empty-interface": 0,
+            "@typescript-esline/no-async-promise-executor": 0,
+            "@typescript-eslint/explicit-module-boundary-types": 0,
+            "@typescript-eslint/no-empty-function": 0,
+            "@typescript-eslint/no-unused-vars": 0,
+            "@typescript-eslint/no-inferrable-types": 0,
+            "@typescript-eslint/ban-types": 0,
+            "@typescript-eslint/ban-ts-comment": 0,
+            "no-sequences": "error"
+        },
+        "ignorePatterns": [
+            "ci",
+            "dist",
+            "coverage",
+            "distribution",
+            "node_modules"
+        ]
+    },
+    "bin": {
+        "cloud-constructor": "ci-cd/index.js"
+    }
+}
