@@ -1,0 +1,6 @@
+@use "../imports" as *;
+
+.component {
+    background-color: var(--global-background);
+    min-height: calc(100vh - var(--global-navigation-menu-height) - var(--global-footer-height));
+}

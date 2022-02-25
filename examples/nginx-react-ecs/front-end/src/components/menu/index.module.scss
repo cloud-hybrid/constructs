@@ -1,0 +1,95 @@
+@use "../imports" as *;
+
+.component {
+    position:         fixed;
+
+    font-size:        0.8575rem;
+
+    top:              0;
+    right:            0;
+    left:             0;
+
+    bottom:           unset;
+
+    z-index:          1000;
+
+    display:          flex;
+    align-items:      center;
+    background-color: var(--global-background);
+
+    user-select:      none;
+
+    height:           var(--global-navigation-menu-height);
+    border-bottom:    1px solid var(--global-border-subtle-00);
+
+    line-height:      1.28575;
+    letter-spacing:   0.16px;
+    font-weight:      400;
+    outline:          none;
+    text-decoration:  none;
+    transition:       border-color 110ms;
+
+    .global {
+        color:           white;
+        text-decoration: none;
+        /* margin-right:    1.0rem; */
+        height:          100%;
+        display:         flex;
+        padding-left:    1.0rem;
+        padding-right:   1.0rem;
+
+        border-radius-top-right:   1px;
+        border-radius-bottom-right:   1px;
+
+        transition:      background-color 250ms, border-color 250ms, color 250ms;
+
+        .prefix {
+            font-weight:  600;
+            color:        white;
+            margin-right: 0.235rem;
+        }
+
+        span {
+            margin-top:    auto;
+            margin-bottom: auto;
+        }
+    }
+
+    .global:hover {
+        background-color: #292929;
+    }
+
+    .global:active {
+        background-color: rgba(30, 30, 30);
+    }
+
+    .item {
+        color:           white;
+        text-decoration: none;
+        margin:          0;
+        height:          100%;
+
+        display:         flex;
+
+        align-items:     center;
+
+        border:          2px solid transparent;
+        border-radius:   1px;
+        padding:         0 1.0rem;
+
+        transition:      background-color 250ms, border-color 250ms, color 250ms;
+
+        span {
+            margin-top:    auto;
+            margin-bottom: auto;
+        }
+    }
+
+    .item:hover {
+        background-color: #292929;
+    }
+
+    .item:active {
+        background-color: rgba(30, 30, 30);
+    }
+}

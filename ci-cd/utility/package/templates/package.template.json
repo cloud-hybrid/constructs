@@ -1,0 +1,25 @@
+{
+    "name": "{{ Name }}",
+    "private": true,
+    "version": "0.0.1",
+    "type": "module",
+    "main": "main.js",
+    "types": "main.ts",
+    "scripts": {
+        "build": "tsc",
+        "compile": "tsc --watch",
+        "get": "cdktf get",
+        "synth": "cdktf synth",
+        "deploy": "cdktf deploy",
+        "start": "npm run initialize",
+        "initialize": "node --no-warnings --enable-source-maps -r source-map-support/register --es-module-specifier-resolution node ."
+    },
+    "dependencies": {
+        "{{ Self }}": "{{ Version }}"
+    },
+    "devDependencies": {
+        "source-map-support": "latest",
+        "@types/node": "latest",
+        "@types/source-map-support": "latest"
+    }
+}

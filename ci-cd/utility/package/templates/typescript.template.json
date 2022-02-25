@@ -1,0 +1,43 @@
+{
+    "compilerOptions": {
+        "checkJs": true,
+        "allowJs": true,
+        "alwaysStrict": true,
+        "incremental": true,
+        "sourceMap": true,
+        "inlineSourceMap": false,
+        "inlineSources": false,
+        "lib": [
+            "ESNext",
+            "ES2018"
+        ],
+        "module": "ESNext",
+        "noEmitOnError": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": false,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": false,
+        "allowUnreachableCode": true,
+        "declaration": true,
+        "noUnusedParameters": true,
+        "moduleResolution": "Node",
+        "preserveWatchOutput": false,
+        "isolatedModules": false,
+        "useDefineForClassFields": true,
+        "resolveJsonModule": true,
+        "baseUrl": ".",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "strictNullChecks": false,
+        "strictPropertyInitialization": false,
+        "exactOptionalPropertyTypes": false,
+        "forceConsistentCasingInFileNames": true,
+        "stripInternal": false,
+        "target": "ES2018",
+        "diagnostics": true
+    },
+    "exclude": ["**/*.d.ts"],
+    "include": ["**/*.ts"]
+}

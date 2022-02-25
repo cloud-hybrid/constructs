@@ -1,10 +1,8 @@
 {
     "language": "typescript",
-    "app": "node --es-module-specifier-resolution node .",
+    "app": "node --no-warnings --enable-source-maps -r source-map-support/register --es-module-specifier-resolution node .",
     "terraformModules": [],
-    "terraformProviders": [
-        "aws@~>4.2.0"
-    ],
+    "terraformProviders": [],
     "output": "distribution",
     "context": {
         "allowSepCharsInLogicalIds": "true",

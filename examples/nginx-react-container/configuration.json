@@ -1,0 +1,9 @@
+{
+    "environment": "Development",
+    "organization": "Cloud-Technology",
+    "service": "React-Container",
+    "creator": "Jacob B. Sanders",
+    "cloud": "AWS",
+    "cfn": "False",
+    "tf": "True"
+}

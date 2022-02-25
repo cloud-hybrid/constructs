@@ -14,7 +14,7 @@
         "initialize": "node --no-warnings --enable-source-maps -r source-map-support/register --es-module-specifier-resolution node ."
     },
     "dependencies": {
-        "@cloud-technology/constructs": "0.5.127",
+        "@cloud-technology/constructs": "../..",
         "typescript": "^4.5.5"
     },
     "devDependencies": {

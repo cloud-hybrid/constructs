@@ -19,6 +19,7 @@
         "allowUnreachableCode": true,
         "noUnusedParameters": true,
         "moduleResolution": "Node",
+        "diagnostics": true,
         "resolveJsonModule": true,
         "baseUrl": ".",
         "esModuleInterop": true,
@@ -31,6 +32,6 @@
         "stripInternal": false,
         "target": "ESNext"
     },
-    "exclude": ["**/*.d.ts"],
+    "exclude": ["**/*.d.ts", "**/*.template.*"],
     "include": ["**/*.ts"]
 }

@@ -48,7 +48,7 @@ class Base extends Construct {
     private static identifier: string;
 
     /*** The Globally Defined Resource Type | Cloud Resource Reference | Constructor Alias */
-    readonly instance: Type;
+    readonly instance?: Type;
 
     private constructor(scope: Construct, name: string) {
         super(scope, name)

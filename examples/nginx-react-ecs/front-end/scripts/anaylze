@@ -1,0 +1,9 @@
+#!/bin/bash --posix
+
+set -euo pipefail
+
+npm install --save-dev --no-audit --no-fund
+
+source-map-explorer ./build/**/*.js &>/dev/null
+
+exit ${?}

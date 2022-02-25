@@ -1,0 +1,44 @@
+@use "styles";
+
+* { box-sizing: border-box }
+
+html {
+    min-height: 100%;
+    position: relative;
+    font-family: var(--global-sans-font);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-image: none;
+    background-origin: padding-box;
+    background-position-x: 0;
+    background-position-y: 0;
+    background-size: auto;
+
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        word-break: break-word;
+        overflow-wrap: break-word;
+
+        font-size: var(--global-base-font-size);
+        line-height: var(--global-line-height);
+
+        color: var(--global-text-primary);
+
+        main {
+            padding: var(--global-page-padding);
+            margin-top: var(--global-navigation-menu-height);
+            margin-bottom: var(--global-footer-height);
+
+            code, pre, pre span, kbd, samp {
+                font-size: 1.075rem;
+                font-family: var(--global-mono-font);
+            }
+        }
+    }
+}

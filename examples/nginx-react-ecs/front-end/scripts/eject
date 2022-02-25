@@ -1,0 +1,9 @@
+#!/bin/bash --posix
+
+set -euo pipefail
+
+npm i --no-fund --no-audit
+
+react-scripts eject
+
+exit ${?}

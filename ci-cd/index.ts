@@ -1,81 +1,104 @@
 #!/usr/bin/env node
 
-/***
- * Assumptions:
- * - User is going to have source code in relative root directory
- * - User has a `package.json` at relative directory (process.cwd())
- * - User does not have a ./ci directory
- */
-
-import Path      from "path";
-import Process   from "process";
+import FS         from "fs";
+import TTY        from "tty";
+import Path       from "path";
+import Process    from "process";
+import Subprocess from "child_process";
 
 import Chalk from "chalk";
+
+// ECMAScript 2015
+import "source-map-support/register.js";
 
 import * as Utility from "./utility/index.js";
 
 const CWD = Process.cwd();
-const Parameters = Process.argv.splice(2);
-const Interactive = Parameters.includes("--interactive") || Parameters.includes("--Interactive");
+const Parameters = Process.argv.splice( 2 ).map( ( $ ) => $.toLowerCase() );
+const Interactive = Parameters.includes( "-i" ) || Parameters.includes( "-I" ) || Parameters.includes( "--interactive" ) || Parameters.includes( "interactive" );
+const Debug = Parameters.includes( "--debug" ) || Parameters.includes( "debug" ) || Parameters.includes( "--verbose" ) || Parameters.includes( "verbose" );
+const Creator = Parameters.includes( "--creator" ) || Parameters.includes( "creator" );
 
-const setup = Chalk.whiteBright.bold("Initializing");
-console.log("[Log]" + " " + setup + " " + "IaC Package ... ", "\n");
+const Initialize = FS.existsSync( Path.join( Process.cwd(), "package.json" ) );
 
-await Utility.Distribution.directory( Path.join( Process.cwd(), "ci" ) );
+( Initialize ) || ( async () => {
+    ( TTY.isatty( Process.stdin.fd ) ) && Subprocess
+        .spawnSync( "npm", [ "init", "--force" ], {
+            shell: false, stdio: "ignore"
+        } );
+} )();
 
-await Utility.CDKTF.generate();
+const Package = FS.existsSync( Path.join( Process.cwd(), "package.json" ) );
 
-await Utility.Package.reconfigure();
+Process.env.debug = String( Debug );
+Process.env.package = String( Package );
+Process.env.interactive = String( Interactive );
 
-await Utility.Main.hydrate();
+const setup = Chalk.whiteBright.bold( "Initializing" );
+console.log( "[Log]" + " " + setup + " " + "IaC Package ... ", "\n" );
 
-await Utility.Typescript.create();
+await Utility.Distribution.directory();
 
-Process.chdir(Path.join(Process.cwd(), "ci"));
+await ( new Utility.CDKTF() ).hydrate();
+await ( new Utility.Package() ).hydrate();
+await ( new Utility.Main() ).hydrate();
+await ( new Utility.Ignore() ).hydrate();
+await ( new Utility.Typescript() ).hydrate();
 
-Process.stdout.write("\n");
+Process.chdir( Path.join( Process.cwd(), Process.env?.["config_iac"] ?? "ci" ) );
 
-const installation = Chalk.magentaBright.bold("Installing");
-console.log("[Log]" + " " + installation + " " + "Dependencies ... ");
+Process.stdout.write( "\n" );
 
-await Utility.Spawn( "npm install --no-fund ." );
+const installation = Chalk.magentaBright.bold( "Installing" );
+console.log( "[Log]" + " " + installation + " " + "Dependencies ... " );
 
-Process.stdout.write("\n");
+( Package ) && await Utility.Spawn( "npm install --no-fund ." );
 
-const constructs = Chalk.greenBright.bold("Downloading");
-console.log("[Log]" + " " + constructs + " " + "Constructs + Provider(s) ... ");
+Process.stdout.write( "\n" );
 
-await Utility.Spawn( "npm run get" );
+const constructs = Chalk.greenBright.bold( "Downloading" );
+console.log( "[Log]" + " " + constructs + " " + "Constructs + Provider(s) ... " );
 
-Process.stdout.write("\n");
+const CDKTF = JSON.parse( String( FS.readFileSync( Path.join( Process.cwd(), "cdktf.json" ) ) ) );
 
-const compilation = Chalk.yellowBright.bold("Compiling");
-console.log("[Log]" + " " + compilation + " " + "TypeScript ➔ JavaScript ... ");
+( CDKTF?.terraformModules?.length > 0 || CDKTF?.terraformProviders?.length > 0 ) && await Utility.Spawn( "npm run get" ) || console.debug( Chalk.bold( "  ↳ " ) + Chalk.dim( "No TF Module(s) || Provider(s) Specified" ) );
+
+Process.stdout.write( "\n" );
+
+const compilation = Chalk.yellowBright.bold( "Compiling" );
+console.log( "[Log]" + " " + compilation + " " + "TypeScript ➔ JavaScript ... " );
 
 await Utility.Spawn( "npm run build" );
 
-Process.stdout.write("\n");
+Process.stdout.write( "\n" );
 
-switch (Interactive) {
+switch ( Interactive ) {
     case true: {
-        const initialize = Chalk.cyanBright.bold("Running");
-        console.log("[Log]" + " " + initialize + " " + Chalk.italic("Interactive") + " " + "First-Time Setup");
+        const initialize = Chalk.cyanBright.bold( "Running" );
+        console.log( "[Log]" + " " + initialize + " " + Chalk.italic( "Interactive" ) + " " + "First-Time Setup" );
 
         await Utility.Spawn( "npm run initialize -- --reconfigure" );
 
         break;
-    } case false: {
-        const initialize = Chalk.redBright.underline.bold("cd ./ci && npm run initialize");
-        console.log(Chalk.bold("Lastly") + "," + " " + Chalk.italic("Execute the Following to Finish Setup"));
-        console.log("  ↳ " + initialize);
+    }
+    case false: {
+        const initialize = Chalk.redBright.underline.bold( "cd ./ci && npm run initialize" );
+        console.log( Chalk.bold( "Lastly" ) + "," + " " + Chalk.italic( "Execute the Following to Finish Setup" ) );
+        console.log( "  ↳ " + initialize );
 
         break;
     }
 }
 
-Process.stdout.write("\n");
+Process.stdout.write( "\n" );
 
-Process.chdir(CWD);
+Process.chdir( CWD );
+
+(Creator) && import("open").then( ( $ ) => $.default( "https://github.com/segmentational", { wait: false } ) ).finally(() => {
+    Process.stdout.write(Utility.ANSI("Bright-Green", "Web Browser has Successfully Opened" + "\n" + "\n"));
+}).finally(() => {
+    Process.stdout.clearLine(0);
+});
 
 export {};
 export default {};

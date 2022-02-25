@@ -19,25 +19,6 @@ class Stack extends TF {
 
         this.configuration = settings( this, name );
     }
-
-    public static async synthesize (stack: typeof Stack) {
-        Assertion.equal(stack instanceof Stack, true);
-
-        /// Artifacts
-        const $ = ( await Synthesize(stack) ).toTerraform();
-
-        /// Display Full Synthesis if Interactive Display (!CI)
-        const inspection = Utility.inspect( $, {
-            showProxy: true,
-            showHidden: true,
-            colors: true,
-            depth: (!Configuration.ci)
-                ? Infinity
-                : 1
-        });
-
-        console.log("\n" + "[Log]", "Terraform Synthesis" + ":", inspection);
-    }
 }
 
 const Reconfigure = () => {

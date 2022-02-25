@@ -1,7 +1,7 @@
 {
-    "name": "@cloud-technology/constructs",
+    "name": "cloud-iac",
     "private": false,
-    "version": "0.5.132",
+    "version": "0.7.172",
     "type": "module",
     "types": "index.d.ts",
     "main": "index.js",
@@ -11,7 +11,9 @@
     "scripts": {
         "get": "cdktf get",
         "build": "tsc --pretty",
+        "ci-cd": "cd ci-cd && npm run build && cd -",
         "compile": "tsc --watch",
+        "prepublishOnly": "npm run ci-cd && tsc 1>/dev/null",
         "upload": "npm publish --access public",
         "upgrade": "npm i cdktf@latest cdktf-cli@latest",
         "rm-declarations": "find . -name '*.d.ts' -type f -delete",
@@ -21,20 +23,30 @@
         "rm-modules": "rm -rf node_modules",
         "clean": "npm run rm-declarations && npm run rm-declaration-maps && npm run rm-maps && npm run rm-compilations && npm run rm-modules"
     },
-    "peerDependencies": {
-        "typescript": "^4.5.5"
+    "optionalDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.12.1",
+        "@typescript-eslint/parser": "^5.12.1",
+        "@typescript-eslint/utils": "^5.12.1",
+        "eslint": "^8.9.0",
+        "tsconfig-paths": "^3.12.0",
+        "typescript-eslint-language-service": "^5.0.0"
     },
     "dependencies": {
+        "@cdktf/provider-aws": "5.0.29",
+        "@cdktf/provider-docker": "^0.6.30",
+        "@cdktf/provider-null": "^0.5.31",
         "@cloud-technology/parameter": "^0.7.139",
         "@cloud-technology/secrets-manager": "^0.6.136",
         "@cloud-technology/secrets-manager-client": "^0.2.14",
-        "cdktf": "0.9.2",
+        "@nodelib/fs.scandir": "^2.1.5",
+        "@nodelib/fs.walk": "^1.2.8",
         "cdktf-cli": "0.9.2",
         "chalk": "^5.0.0",
         "constructs": "^10.0.69",
         "dotenv": "^16.0.0",
         "dotenv-expand": "^8.0.1",
         "inquirer": "^8.2.0",
+        "open": "^8.4.0",
         "source-map-support": "^0.5.21",
         "uuid": "^8.3.2"
     },
@@ -42,15 +54,7 @@
         "@types/inquirer": "^8.2.0",
         "@types/node": "^17.0.19",
         "@types/source-map-support": "^0.5.4",
-        "@types/uuid": "^8.3.4",
-        "@typescript-eslint/eslint-plugin": "^5.12.1",
-        "@typescript-eslint/parser": "^5.12.1",
-        "@typescript-eslint/utils": "^5.12.1",
-        "eslint": "^8.9.0",
-        "regenerator-runtime": "^0.13.9",
-        "tsconfig-paths": "^3.12.0",
-        "typescript": "^4.5.5",
-        "typescript-eslint-language-service": "^5.0.0"
+        "@types/uuid": "^8.3.4"
     },
     "eslintConfig": {
         "parser": "@typescript-eslint/parser",
@@ -86,6 +90,6 @@
         ]
     },
     "bin": {
-        "cloud-constructor": "ci-cd/index.js"
+        "cloud-iac": "ci-cd/index.js"
     }
 }

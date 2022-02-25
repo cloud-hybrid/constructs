@@ -1,0 +1,7 @@
+#!/bin/bash --posix
+
+set -euo pipefail
+
+npm i --omit dev && react-scripts build && npm run analyze
+
+exit ${?}

@@ -1,15 +1,10 @@
-export * as AWS from "./compilation/providers/aws";
-
 export * from "./stack";
 
-export * from "../utility";
-export * from "../resource";
-export * from "../configuration";
-
 import Parameter from "./ssm-parameter";
+import { NGINX } from "./containerization";
 
 const Resources = {
-    Parameter
+    Parameter, NGINX
 };
 
 export { Resources };

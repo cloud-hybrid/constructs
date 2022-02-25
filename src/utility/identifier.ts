@@ -11,14 +11,24 @@
  *
  */
 
-const ID = (input: string, options: { condense: boolean } | null | undefined = { condense: true }) => {
-    return input.trim()
-        .replace( /_/g, "-" )
-        .replace( /([a-z])([A-Z])/g, "$1-$2" )
-        .replace( /\W/g, ($) => /[À-ž]/.test( $ ) ? $ : "-" )
-        .replace( /^-+|-+$/g, "" )
-        .replace( /-{2,}/g, ($) => options && options.condense ? "-" : $ )
-        .toLowerCase();
+const ID = (input: string | string[], options: { condense: boolean } | null | undefined = { condense: true }) => {
+    if (typeof input === "string") {
+        return input.trim()
+            .replace( /_/g, "-" )
+            .replace( /([a-z])([A-Z])/g, "$1-$2" )
+            .replace( /\W/g, ($) => /[À-ž]/.test( $ ) ? $ : "-" )
+            .replace( /^-+|-+$/g, "" )
+            .replace( /-{2,}/g, ($) => options && options.condense ? "-" : $ )
+            .toLowerCase();
+    } else {
+        return input.join("-").trim()
+            .replace( /_/g, "-" )
+            .replace( /([a-z])([A-Z])/g, "$1-$2" )
+            .replace( /\W/g, ($) => /[À-ž]/.test( $ ) ? $ : "-" )
+            .replace( /^-+|-+$/g, "" )
+            .replace( /-{2,}/g, ($) => options && options.condense ? "-" : $ )
+            .toLowerCase();
+    }
 };
 
 export { ID };

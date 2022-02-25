@@ -1,0 +1,7 @@
+#!/bin/bash --posix
+
+set -euo pipefail
+
+react-scripts start
+
+exit ${?}

@@ -1,0 +1,25 @@
+{
+    "version": "0.0.0",
+    "description": "nginx-base-container",
+    "private": true,
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc",
+        "compile": "tsc --watch",
+        "get": "cdktf get",
+        "synth": "cdktf synth",
+        "deploy": "cdktf deploy",
+        "start": "npm run initialize",
+        "initialize": "node --no-warnings --enable-source-maps -r source-map-support/register --es-module-specifier-resolution node ."
+    },
+    "dependencies": {
+        "@cloud-technology/constructs": "../..",
+        "typescript": "^4.5.5"
+    },
+    "devDependencies": {
+        "source-map-support": "latest",
+        "@types/node": "latest",
+        "@types/source-map-support": "latest"
+    }
+}

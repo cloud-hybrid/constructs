@@ -4,6 +4,7 @@
         "allowJs": true,
         "alwaysStrict": true,
         "sourceMap": true,
+        "incremental": true,
         "inlineSourceMap": false,
         "inlineSources": false,
         "lib": [
@@ -32,6 +33,6 @@
         "stripInternal": false,
         "target": "ESNext"
     },
-    "exclude": ["**/*.d.ts", "examples", "ci"],
-    "include": ["**/*.ts", "**/*.json", "index.ts"]
+    "exclude": ["**/*.d.ts", "examples", "ci", "**/*.template.*"],
+    "include": ["**/*.ts", "**/*.json", "**/*.tpl.*", "index.ts"]
 }

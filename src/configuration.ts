@@ -2,11 +2,11 @@ import Path    from "path";
 import Module  from "module";
 import Process from "process";
 
-import * as AWS from "./constructs/compilation/providers/aws";
+import { AWS } from ".";
 
 import { Construct } from "constructs";
 
-import { App, TerraformStack, TerraformOutput, TerraformOutputConfig } from "cdktf";
+import { App, TerraformStack, TerraformOutput } from "cdktf";
 
 import { ID }                       from "./utility";
 import { Gitlab, VCS }              from "./backend/gitlab";
@@ -77,24 +77,6 @@ class Configuration extends Construct {
             defaultTags: this.identifiers,
             sharedCredentialsFile: this.credentials
         } );
-
-        /// Output( scope, ID( [ name, "Configuration", "Backend" ].join( "-" ) ), {
-        ///     description: "Stack's State Backend",
-        ///     sensitive: false,
-        ///     value: this.backend.settings
-        /// } );
-
-        new TerraformOutput( scope, ID( [ name, "Configuration" ].join( "-" ) ), {
-            description: "Stack's Instantiated Credential's Profile",
-            sensitive: false,
-            value: this.profile
-        } );
-
-        /// Output( scope, ID( [ name, "Configuration", "Tags" ].join( "-" ) ), {
-        ///     description: "Stack's Propagated Resource Tag(s)",
-        ///     sensitive: false,
-        ///     value: this.identifiers.tags
-        /// } );
     }
 
     public static tags( input: Input ) {
@@ -113,7 +95,7 @@ class Configuration extends Construct {
  * @constructor
  *
  */
-const Initialize = async function (path: string) {
+const Initialize = async function (path: string = Path.join(Process.cwd(), "configuration.json")) {
     const Settings = Import(path);
 
     const tags = Configuration.tags( {
@@ -125,8 +107,6 @@ const Initialize = async function (path: string) {
         environment: Settings.environment,
         organization: Settings.organization
     } as Input );
-
-    /// assert.match(environment, RegExp("(Development)|(QA)|(Staging)|(UAT)|(Production)"));
 
     /// const backend = await Gitlab.initialize( environment as "Development" | "QA" | "Staging" | "UAT" | "Production", 0 );
 

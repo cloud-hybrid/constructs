@@ -2,11 +2,16 @@
     "name": "ci-cd",
     "private": true,
     "version": "0.0.0",
+    "global-style": true,
     "types": "index.d.ts",
     "type": "module",
     "main": "index.js",
     "description": "CLI Bootstrapper",
+    "config": {
+        "iac": "ci"
+    },
     "scripts": {
+        "build": "tsc --pretty",
         "compile": "tsc --watch"
     },
     "dependencies": {

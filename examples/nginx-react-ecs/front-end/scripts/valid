@@ -1,0 +1,7 @@
+#!/bin/bash --posix
+
+set -euo pipefail
+
+npm install --no-audit --no-fund --no-package-lock --ignore-scripts --dry-run
+
+exit ${?}

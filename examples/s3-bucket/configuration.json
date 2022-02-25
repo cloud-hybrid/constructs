@@ -1,9 +1,0 @@
-{
-    "environment": "Development",
-    "organization": "Capstone",
-    "service": "Test-CDKTF-Service",
-    "creator": "Jacob Sanders",
-    "cloud": "AWS",
-    "cfn": "False",
-    "tf": "True"
-}

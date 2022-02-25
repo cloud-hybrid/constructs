@@ -34,7 +34,7 @@ import FS from "fs";
 const CWD = Process.cwd();
 const PWD = import.meta.url.replace("file://", "");
 
-const Subprocess = await import("./utility/subprocess.js").then(($) => $.default);
+const Subprocess = await import("./utility/scripts/subprocess.js").then(($) => $.default);
 
 const CLI = Process.argv;
 const Parameters = CLI.splice(2);

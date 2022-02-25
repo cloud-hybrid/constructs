@@ -1,0 +1,524 @@
+$black:                     #000000 !default;
+$black-hover:               #212121 !default;
+$black-100:                 #000000 !default;
+$black-layer:               #161616 !default;
+
+$white:                     #FFFFFF !default;
+$white-0:                   #FFFFFF !default;
+$white-hover:               #E8E8E8 !default;
+
+$blue-10:                   #EDF5FF !default;
+$blue-20:                   #D0E2FF !default;
+$blue-30:                   #A6C8FF !default;
+$blue-40:                   #78A9FF !default;
+$blue-50:                   #4589FF !default;
+$blue-60:                   #0F62FE !default;
+$blue-70:                   #0043CE !default;
+$blue-80:                   #002D9C !default;
+$blue-90:                   #001D6C !default;
+$blue-100:                  #001141 !default;
+
+$cool-gray-10:              #F2F4F8 !default;
+$cool-gray-20:              #DDE1E6 !default;
+$cool-gray-30:              #C1C7CD !default;
+$cool-gray-40:              #A2A9B0 !default;
+$cool-gray-50:              #878D96 !default;
+$cool-gray-60:              #697077 !default;
+$cool-gray-70:              #4D5358 !default;
+$cool-gray-80:              #343A3F !default;
+$cool-gray-90:              #21272A !default;
+$cool-gray-100:             #121619 !default;
+
+$cyan-10:                   #E5F6FF !default;
+$cyan-20:                   #BAE6FF !default;
+$cyan-30:                   #82CFFF !default;
+$cyan-40:                   #33B1FF !default;
+$cyan-50:                   #1192E8 !default;
+$cyan-60:                   #0072C3 !default;
+$cyan-70:                   #00539A !default;
+$cyan-80:                   #003A6D !default;
+$cyan-90:                   #012749 !default;
+$cyan-100:                  #061727 !default;
+
+$gray-10:                   #F4F4F4 !default;
+$gray-20:                   #E0E0E0 !default;
+$gray-30:                   #C6C6C6 !default;
+$gray-40:                   #A8A8A8 !default;
+$gray-50:                   #8D8D8D !default;
+$gray-60:                   #6F6F6F !default;
+$gray-70:                   #525252 !default;
+$gray-80:                   #393939 !default;
+$gray-90:                   #262626 !default;
+$gray-100:                  #161616 !default;
+
+$green-10:                  #DEFBE6 !default;
+$green-20:                  #A7F0BA !default;
+$green-30:                  #6FDC8C !default;
+$green-40:                  #42BE65 !default;
+$green-50:                  #24A148 !default;
+$green-60:                  #198038 !default;
+$green-70:                  #0E6027 !default;
+$green-80:                  #044317 !default;
+$green-90:                  #022D0D !default;
+$green-100:                 #071908 !default;
+
+$magenta-10:                #FFF0F7 !default;
+$magenta-20:                #FFD6E8 !default;
+$magenta-30:                #FFAFD2 !default;
+$magenta-40:                #FF7EB6 !default;
+$magenta-50:                #EE5396 !default;
+$magenta-60:                #D02670 !default;
+$magenta-70:                #9F1853 !default;
+$magenta-80:                #740937 !default;
+$magenta-90:                #510224 !default;
+$magenta-100:               #2A0A18 !default;
+
+$orange-10:                 #FFF2E8 !default;
+$orange-20:                 #FFD9BE !default;
+$orange-30:                 #FFB784 !default;
+$orange-40:                 #FF832B !default;
+$orange-50:                 #EB6200 !default;
+$orange-60:                 #BA4E00 !default;
+$orange-70:                 #8A3800 !default;
+$orange-80:                 #5E2900 !default;
+$orange-90:                 #3E1A00 !default;
+$orange-100:                #231000 !default;
+
+$purple-10:                 #FF1AFF !default;
+$purple-20:                 #FF00FF !default;
+$purple-30:                 #E600E6 !default;
+$purple-40:                 #CC00CC !default;
+$purple-50:                 #B300B3 !default;
+$purple-60:                 #990099 !default;
+$purple-70:                 #800080 !default;
+$purple-80:                 #660066 !default;
+$purple-90:                 #4D004D !default;
+$purple-100:                #330033 !default;
+
+$red-10:                    #FFF1F1 !default;
+$red-20:                    #FFD7D9 !default;
+$red-30:                    #FFB3B8 !default;
+$red-40:                    #FF8389 !default;
+$red-50:                    #FA4D56 !default;
+$red-60:                    #DA1E28 !default;
+$red-70:                    #A2191F !default;
+$red-80:                    #750E13 !default;
+$red-90:                    #520408 !default;
+$red-100:                   #2D0709 !default;
+
+$teal-10:                   #D9FBFB !default;
+$teal-20:                   #9EF0F0 !default;
+$teal-30:                   #3DDBD9 !default;
+$teal-40:                   #08BDBA !default;
+$teal-50:                   #009D9A !default;
+$teal-60:                   #007D79 !default;
+$teal-70:                   #005D5D !default;
+$teal-80:                   #004144 !default;
+$teal-90:                   #022B30 !default;
+$teal-100:                  #081A1C !default;
+
+$warm-gray-10:              #F7F3F2 !default;
+$warm-gray-20:              #E5E0DF !default;
+$warm-gray-30:              #CAC5C4 !default;
+$warm-gray-40:              #ADA8A8 !default;
+$warm-gray-50:              #8F8B8B !default;
+$warm-gray-60:              #726E6E !default;
+$warm-gray-70:              #565151 !default;
+$warm-gray-80:              #3C3838 !default;
+$warm-gray-90:              #272525 !default;
+$warm-gray-100:             #171414 !default;
+
+$yellow-10:                 #FCF4D6 !default;
+$yellow-20:                 #FDDC69 !default;
+$yellow-30:                 #F1C21B !default;
+$yellow-40:                 #D2A106 !default;
+$yellow-50:                 #B28600 !default;
+$yellow-60:                 #8E6A00 !default;
+$yellow-70:                 #684E00 !default;
+$yellow-80:                 #483700 !default;
+$yellow-90:                 #302400 !default;
+$yellow-100:                #1C1500 !default;
+
+$blue-10-hover:             #DBEBFF !default;
+$blue-20-hover:             #B8D3FF !default;
+$blue-30-hover:             #8AB6FF !default;
+$blue-40-hover:             #5C97FF !default;
+$blue-50-hover:             #1F70FF !default;
+$blue-60-hover:             #0050E6 !default;
+$blue-70-hover:             #0053FF !default;
+$blue-80-hover:             #0039C7 !default;
+$blue-90-hover:             #00258A !default;
+$blue-100-hover:            #001F75 !default;
+
+$cool-gray-10-hover:        #E4E9F1 !default;
+$cool-gray-20-hover:        #CDD3DA !default;
+$cool-gray-30-hover:        #ADB5BD !default;
+$cool-gray-40-hover:        #9199A1 !default;
+$cool-gray-50-hover:        #757B85 !default;
+$cool-gray-60-hover:        #585E64 !default;
+$cool-gray-70-hover:        #5D646A !default;
+$cool-gray-80-hover:        #434A51 !default;
+$cool-gray-90-hover:        #2B3236 !default;
+$cool-gray-100-hover:       #222A2F !default;
+
+$cyan-10-hover:             #CCEEFF !default;
+$cyan-20-hover:             #99DAFF !default;
+$cyan-30-hover:             #57BEFF !default;
+$cyan-40-hover:             #059FFF !default;
+$cyan-50-hover:             #0F7EC8 !default;
+$cyan-60-hover:             #005FA3 !default;
+$cyan-70-hover:             #0066BD !default;
+$cyan-80-hover:             #00498A !default;
+$cyan-90-hover:             #013360 !default;
+$cyan-100-hover:            #0B2947 !default;
+
+$gray-10-hover:             #E8E8E8 !default;
+$gray-20-hover:             #D1D1D1 !default;
+$gray-30-hover:             #B5B5B5 !default;
+$gray-40-hover:             #999999 !default;
+$gray-50-hover:             #7A7A7A !default;
+$gray-60-hover:             #5E5E5E !default;
+$gray-70-hover:             #636363 !default;
+$gray-80-hover:             #474747 !default;
+$gray-90-hover:             #333333 !default;
+$gray-100-hover:            #292929 !default;
+
+$green-10-hover:            #B6F6C8 !default;
+$green-20-hover:            #74E792 !default;
+$green-30-hover:            #36CE5E !default;
+$green-40-hover:            #3BAB5A !default;
+$green-50-hover:            #208E3F !default;
+$green-60-hover:            #166F31 !default;
+$green-70-hover:            #11742F !default;
+$green-80-hover:            #05521C !default;
+$green-90-hover:            #033B11 !default;
+$green-100-hover:           #0D300F !default;
+
+$magenta-10-hover:          #FFE0EF !default;
+$magenta-20-hover:          #FFBDDA !default;
+$magenta-30-hover:          #FF94C3 !default;
+$magenta-40-hover:          #FF57A0 !default;
+$magenta-50-hover:          #E3176F !default;
+$magenta-60-hover:          #B0215F !default;
+$magenta-70-hover:          #BF1D63 !default;
+$magenta-80-hover:          #8E0B43 !default;
+$magenta-90-hover:          #68032E !default;
+$magenta-100-hover:         #53142F !default;
+
+$orange-10-hover:           #FFE2CC !default;
+$orange-20-hover:           #FFC69E !default;
+$orange-30-hover:           #FF9D57 !default;
+$orange-40-hover:           #FA6800 !default;
+$orange-50-hover:           #CC5500 !default;
+$orange-60-hover:           #9E4200 !default;
+$orange-70-hover:           #A84400 !default;
+$orange-80-hover:           #753300 !default;
+$orange-90-hover:           #522200 !default;
+$orange-100-hover:          #421E00 !default;
+
+$purple-10-hover:           #EDE5FF !default;
+$purple-20-hover:           #DCC7FF !default;
+$purple-30-hover:           #C5A3FF !default;
+$purple-40-hover:           #AE7AFF !default;
+$purple-50-hover:           #9352FF !default;
+$purple-60-hover:           #7822FB !default;
+$purple-70-hover:           #7C3DD6 !default;
+$purple-80-hover:           #5B24AD !default;
+$purple-90-hover:           #40197B !default;
+$purple-100-hover:          #341C59 !default;
+
+$red-10-hover:              #FFE0E0 !default;
+$red-20-hover:              #FFC2C5 !default;
+$red-30-hover:              #FF99A0 !default;
+$red-40-hover:              #FF6168 !default;
+$red-50-hover:              #EE0713 !default;
+$red-60-hover:              #B81922 !default;
+$red-70-hover:              #C21E25 !default;
+$red-80-hover:              #921118 !default;
+$red-90-hover:              #66050A !default;
+$red-100-hover:             #540D11 !default;
+
+$teal-10-hover:             #ACF6F6 !default;
+$teal-20-hover:             #57E5E5 !default;
+$teal-30-hover:             #25CAC8 !default;
+$teal-40-hover:             #07ABA9 !default;
+$teal-50-hover:             #008A87 !default;
+$teal-60-hover:             #006B68 !default;
+$teal-70-hover:             #007070 !default;
+$teal-80-hover:             #005357 !default;
+$teal-90-hover:             #033940 !default;
+$teal-100-hover:            #0F3034 !default;
+
+$warm-gray-10-hover:        #F0E8E6 !default;
+$warm-gray-20-hover:        #D8D0CF !default;
+$warm-gray-30-hover:        #B9B3B1 !default;
+$warm-gray-40-hover:        #9C9696 !default;
+$warm-gray-50-hover:        #7F7B7B !default;
+$warm-gray-60-hover:        #605D5D !default;
+$warm-gray-70-hover:        #696363 !default;
+$warm-gray-80-hover:        #4C4848 !default;
+$warm-gray-90-hover:        #343232 !default;
+$warm-gray-100-hover:       #2C2626 !default;
+
+$yellow-10-hover:           #F8E6A0 !default;
+$yellow-20-hover:           #FCCD27 !default;
+$yellow-30-hover:           #DDB00E !default;
+$yellow-40-hover:           #BC9005 !default;
+$yellow-50-hover:           #9E7700 !default;
+$yellow-60-hover:           #755800 !default;
+$yellow-70-hover:           #806000 !default;
+$yellow-80-hover:           #5C4600 !default;
+$yellow-90-hover:           #3D2E00 !default;
+$yellow-100-hover:          #332600 !default;
+
+$colors:                    (
+                                    black: (
+                                            100: #000000,
+                                    ),
+                                    blue: (
+                                            10: #EDF5FF,
+                                            20: #D0E2FF,
+                                            30: #A6C8FF,
+                                            40: #78A9FF,
+                                            50: #4589FF,
+                                            60: #0F62FE,
+                                            70: #0043CE,
+                                            80: #002D9C,
+                                            90: #001D6C,
+                                            100: #001141,
+                                    ),
+                                    cool-gray: (
+                                            10: #F2F4F8,
+                                            20: #DDE1E6,
+                                            30: #C1C7CD,
+                                            40: #A2A9B0,
+                                            50: #878D96,
+                                            60: #697077,
+                                            70: #4D5358,
+                                            80: #343A3F,
+                                            90: #21272A,
+                                            100: #121619,
+                                    ),
+                                    cyan: (
+                                            10: #E5F6FF,
+                                            20: #BAE6FF,
+                                            30: #82CFFF,
+                                            40: #33B1FF,
+                                            50: #1192E8,
+                                            60: #0072C3,
+                                            70: #00539A,
+                                            80: #003A6D,
+                                            90: #012749,
+                                            100: #061727,
+                                    ),
+                                    gray: (
+                                            10: #F4F4F4,
+                                            20: #E0E0E0,
+                                            30: #C6C6C6,
+                                            40: #A8A8A8,
+                                            50: #8D8D8D,
+                                            60: #6F6F6F,
+                                            70: #525252,
+                                            80: #393939,
+                                            90: #262626,
+                                            100: #161616,
+                                    ),
+                                    green: (
+                                            10: #DEFBE6,
+                                            20: #A7F0BA,
+                                            30: #6FDC8C,
+                                            40: #42BE65,
+                                            50: #24A148,
+                                            60: #198038,
+                                            70: #0E6027,
+                                            80: #044317,
+                                            90: #022D0D,
+                                            100: #071908,
+                                    ),
+                                    magenta: (
+                                            10: #FFF0F7,
+                                            20: #FFD6E8,
+                                            30: #FFAFD2,
+                                            40: #FF7EB6,
+                                            50: #EE5396,
+                                            60: #D02670,
+                                            70: #9F1853,
+                                            80: #740937,
+                                            90: #510224,
+                                            100: #2A0A18,
+                                    ),
+                                    orange: (
+                                            10: #FFF2E8,
+                                            20: #FFD9BE,
+                                            30: #FFB784,
+                                            40: #FF832B,
+                                            50: #EB6200,
+                                            60: #BA4E00,
+                                            70: #8A3800,
+                                            80: #5E2900,
+                                            90: #3E1A00,
+                                            100: #231000,
+                                    ),
+                                    purple: (
+                                            10: #F6F2FF,
+                                            20: #E8DAFF,
+                                            30: #D4BBFF,
+                                            40: #BE95FF,
+                                            50: #A56EFF,
+                                            60: #8A3FFC,
+                                            70: #6929C4,
+                                            80: #491D8B,
+                                            90: #31135E,
+                                            100: #1C0F30,
+                                    ),
+                                    red: (
+                                            10: #FFF1F1,
+                                            20: #FFD7D9,
+                                            30: #FFB3B8,
+                                            40: #FF8389,
+                                            50: #FA4D56,
+                                            60: #DA1E28,
+                                            70: #A2191F,
+                                            80: #750E13,
+                                            90: #520408,
+                                            100: #2D0709,
+                                    ),
+                                    teal: (
+                                            10: #D9FBFB,
+                                            20: #9EF0F0,
+                                            30: #3DDBD9,
+                                            40: #08BDBA,
+                                            50: #009D9A,
+                                            60: #007D79,
+                                            70: #005D5D,
+                                            80: #004144,
+                                            90: #022B30,
+                                            100: #081A1C,
+                                    ),
+                                    warm-gray: (
+                                            10: #F7F3F2,
+                                            20: #E5E0DF,
+                                            30: #CAC5C4,
+                                            40: #ADA8A8,
+                                            50: #8F8B8B,
+                                            60: #726E6E,
+                                            70: #565151,
+                                            80: #3C3838,
+                                            90: #272525,
+                                            100: #171414,
+                                    ),
+                                    white: (
+                                            0: #FFFFFF,
+                                    ),
+                                    yellow: (
+                                            10: #FCF4D6,
+                                            20: #FDDC69,
+                                            30: #F1C21B,
+                                            40: #D2A106,
+                                            50: #B28600,
+                                            60: #8E6A00,
+                                            70: #684E00,
+                                            80: #483700,
+                                            90: #302400,
+                                            100: #1C1500,
+                                    ),
+                            ) !default;
+
+$background:                rgb(22, 22, 22);
+$background-inverse:        #F4F4F4;
+$background-brand:          #0F62FE;
+$background-active:         #393939;
+$background-hover:          #292929;
+$background-inverse-hover:  #E8E8E8;
+$background-selected:       #262626;
+$background-selected-hover: #333333;
+$layer-01:                  #262626;
+$layer-active-01:           #525252;
+$layer-hover-01:            #333333;
+$layer-selected-01:         #393939;
+$layer-selected-hover-01:   #474747;
+$layer-02:                  #393939;
+$layer-active-02:           #6F6F6F;
+$layer-hover-02:            #474747;
+$layer-selected-02:         #525252;
+$layer-selected-hover-02:   #636363;
+$layer-03:                  #525252;
+$layer-active-03:           #8D8D8D;
+$layer-hover-03:            #636363;
+$layer-selected-03:         #6F6F6F;
+$layer-selected-hover-03:   #5E5E5E;
+$layer-disabled:            #262626;
+$layer-selected-inverse:    #F4F4F4;
+$layer-selected-disabled:   #A8A8A8;
+$layer-accent-01:           #393939;
+$layer-accent-active-01:    #6F6F6F;
+$layer-accent-hover-01:     #474747;
+$layer-accent-02:           #525252;
+$layer-accent-active-02:    #8D8D8D;
+$layer-accent-hover-02:     #636363;
+$layer-accent-03:           #6F6F6F;
+$layer-accent-active-03:    #393939;
+$layer-accent-hover-03:     #5E5E5E;
+$field-01:                  #262626;
+$field-hover-01:            #333333;
+$field-02:                  #393939;
+$field-hover-02:            #474747;
+$field-03:                  #525252;
+$field-hover-03:            #636363;
+$field-disabled:            #393939;
+$border-subtle-00:          #393939;
+$border-subtle-01:          #393939;
+$border-subtle-selected-01: #525252;
+$border-subtle-02:          #525252;
+$border-subtle-selected-02: #6F6F6F;
+$border-subtle-03:          #6F6F6F;
+$border-subtle-selected-03: #8D8D8D;
+$border-strong-01:          #6F6F6F;
+$border-strong-02:          #8D8D8D;
+$border-strong-03:          #A8A8A8;
+$border-inverse:            #F4F4F4;
+$border-interactive:        #4589FF;
+$border-disabled:           #262626;
+$text-primary:              #F4F4F4;
+$text-secondary:            #C6C6C6;
+$text-placeholder:          #6F6F6F;
+$text-helper:               #A8A8A8;
+$text-error:                #FFB3B8;
+$text-inverse:              #161616;
+$text-on-color:             #FFFFFF;
+$text-on-color-disabled:    #A8A8A8;
+$text-disabled:             #525252;
+$link-primary:              #78A9FF;
+$link-primary-hover:        #A6C8FF;
+$link-secondary:            #A6C8FF;
+$link-inverse:              #0F62FE;
+$link-visited:              #BE95FF;
+$icon-primary:              #F4F4F4;
+$icon-secondary:            #C6C6C6;
+$icon-inverse:              #161616;
+$icon-on-color:             #FFFFFF;
+$icon-on-color-disabled:    #A8A8A8;
+$icon-disabled:             #525252;
+$support-error:             #FA4D56;
+$support-success:           #42BE65;
+$support-warning:           #F1C21B;
+$support-info:              #4589FF;
+$support-error-inverse:     #DA1E28;
+$support-success-inverse:   #24A148;
+$support-warning-inverse:   #F1C21B;
+$support-info-inverse:      #0F62FE;
+$support-caution-minor:     #F1C21B;
+$support-caution-major:     #FF832B;
+$support-caution-undefined: #A56EFF;
+$focus:                     #FFFFFF;
+$focus-inset:               #161616;
+$focus-inverse:             #0F62FE;
+$skeleton-background:       #292929;
+$skeleton-element:          #393939;
+$interactive:               #4589FF;
+$highlight:                 #D0E2FF;
+$overlay:                   rgba(0, 0, 0, 0.65);
+$toggle-off:                #8D8D8D;
+$shadow:                    rgba(0, 0, 0, 0.8);
+
+$toastify-color-dark:       black;

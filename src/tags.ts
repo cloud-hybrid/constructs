@@ -4,7 +4,7 @@ import Process from "process";
 
 import Prompt, { Question, Validation } from "./utility/question";
 
-import { AwsProviderDefaultTags } from "./constructs/compilation/providers/aws";
+import { AwsProviderDefaultTags } from "@cdktf/provider-aws";
 
 type Tagging = AwsProviderDefaultTags;
 

@@ -1,0 +1,73 @@
+{
+    "name": "@cloud-technology/api",
+    "private": false,
+    "version": "0.1.112",
+    "description": "...",
+    "type": "module",
+    "types": "stubs",
+    "main": "distribution/index.js",
+    "scripts": {
+        "server": "node ./distribution/index.js",
+        "start": "node --no-warnings --es-module-specifier-resolution node . ",
+        "package": "npm pack",
+        "build": "tsc --pretty",
+        "compile": "tsc --watch",
+        "production": "npm i --omit dev && npm run start",
+        "setup": "npm install --save-dev",
+        "upload": "npm publish --access public",
+        "test": "node --es-module-specifier-resolution node unit-testing",
+        "listening": "lsof -nP -iTCP -sTCP:LISTEN | grep 3443 | awk '{ print $2 }' | head -1",
+        "rm-declarations": "find . -name '*.d.ts' -type f -delete",
+        "rm-declaration-maps": "find . -name '*.d.ts.map' -type f -delete",
+        "rm-maps": "find . -name '*.js.map' -type f -delete",
+        "rm-compilations": "find . -name '*.js' -type f -delete",
+        "rm-modules": "rm -rf node_modules",
+        "clean": "npm run rm-declarations && npm run rm-declaration-maps && npm run rm-maps && npm run rm-compilations && npm run rm-modules"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cloud-hybrid/delta.git",
+        "directory": "packages/api"
+    },
+    "config": {
+        "port": 3443
+    },
+    "dependencies": {
+        "@aws-sdk/client-s3": "^3.48.0",
+        "@aws-sdk/credential-providers": "^3.48.0",
+        "@aws-sdk/s3-request-presigner": "^3.48.0",
+        "ajv": "^8.10.0",
+        "bcrypt": "^5.0.1",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.1",
+        "compression": "^1.7.4",
+        "cors": "^2.8.5",
+        "express": "^5.0.0-beta.1",
+        "express-ws": "^5.0.2",
+        "mongodb": "^4.3.1",
+        "mongoose": "^6.2.1",
+        "octokit": "^1.7.1",
+        "pino": "^7.8.0",
+        "pino-http": "^6.6.0",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "@aws-sdk/types": "^3.47.1",
+        "@jest/globals": "latest",
+        "@types/bcrypt": "^5.0.0",
+        "@types/body-parser": "^1.19.2",
+        "@types/compression": "^1.7.2",
+        "@types/cors": "^2.8.12",
+        "@types/express": "^4.17.13",
+        "@types/express-serve-static-core": "^4.17.28",
+        "@types/express-ws": "^3.0.1",
+        "@types/jest": "latest",
+        "@types/node": "^17.0.13",
+        "@types/pino-http": "^5.8.1",
+        "@types/uuid": "^8.3.4",
+        "jest": "latest",
+        "ts-jest": "latest",
+        "tsconfig-paths": "^3.12.0",
+        "typescript": "^4.7.0-dev.20220223"
+    }
+}

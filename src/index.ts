@@ -1,5 +1,6 @@
-import * as AWS from  "./constructs/compilation/providers/aws";
-export * from "./constructs/compilation/providers/aws";
+import * as AWS from  "@cdktf/provider-aws";
+import * as Null from "@cdktf/provider-null";
+import * as Docker from "@cdktf/provider-docker";
 
 export * from "./configuration";
 export * from "./credentials";
@@ -12,4 +13,4 @@ export * from "./backend";
 export * from "./errors";
 export * from "./utility";
 
-export { AWS };
+export { AWS, Null, Docker };

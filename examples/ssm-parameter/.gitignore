@@ -63,3 +63,5 @@ tf/**/.terraform.lock.hcl
 .gitlab-token
 .gitlab-url
 .gitlab-username
+
+configuration.json

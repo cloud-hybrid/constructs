@@ -1,0 +1,13 @@
+{
+    "language": "typescript",
+    "app": "tsc && node --es-module-specifier-resolution node .",
+    "terraformModules": [],
+    "terraformProviders": [
+        "aws@~>4.2.0"
+    ],
+    "output": "distribution",
+    "context": {
+        "allowSepCharsInLogicalIds": "true",
+        "excludeStackIdFromLogicalIds": "true"
+    }
+}

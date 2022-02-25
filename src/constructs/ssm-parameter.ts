@@ -4,7 +4,7 @@ import Process from "process";
 
 import { Parameter } from "@cloud-technology/parameter";
 
-import { AWS, Base, Construct, ID, Output, State, Store } from ".";
+import { AWS, Base, Construct, ID, Output, State, Store } from "..";
 
 /***
  * SSM Parameter Configuration Settings

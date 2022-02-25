@@ -1,0 +1,5 @@
+#!/bin/bash --posix
+
+npm help npm
+
+exit ${?}

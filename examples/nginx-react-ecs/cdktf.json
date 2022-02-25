@@ -1,0 +1,11 @@
+{
+    "language": "typescript",
+    "app": "node --no-warnings --enable-source-maps -r source-map-support/register --es-module-specifier-resolution node ./src",
+    "terraformModules": [],
+    "terraformProviders": [],
+    "output": "distribution",
+    "context": {
+        "allowSepCharsInLogicalIds": "true",
+        "excludeStackIdFromLogicalIds": "true"
+    }
+}
