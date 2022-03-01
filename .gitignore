@@ -73,3 +73,5 @@ tf/**/.terraform.lock.hcl
 *.d.ts.map
 
 ci
+coverage
+configuration.json
