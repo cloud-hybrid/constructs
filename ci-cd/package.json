@@ -11,11 +11,20 @@
         "iac": "ci"
     },
     "scripts": {
+        "test": "node --experimental-vm-modules $(command -v jest) --config jest.config.js --injectGlobals",
         "build": "tsc --pretty",
         "compile": "tsc --watch"
     },
     "dependencies": {
-        "chalk": "^5.0.0"
+        "chalk": "^5.0.0",
+        "ansi-styles": "^5.2.0"
+    },
+    "devDependencies": {
+        "@types/node": "latest",
+        "ts-node": "^10.5.0",
+        "@jest/globals": "^27.5.1",
+        "@types/jest": "^27.4.1",
+        "jest": "^27.5.1"
     },
     "license": "BSD-2-Clause",
     "author": "Jacob B. Sanders"

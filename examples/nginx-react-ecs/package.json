@@ -8,7 +8,7 @@
     "scripts": {
         "get": "cdktf get",
         "build": "tsc",
-        "deploy": "node ci/deploy.js",
+        "deploy": "cdktf deploy",
         "destroy": "node ci/destroy.js",
         "synth": "cdktf synth",
         "compile": "tsc --pretty --watch",

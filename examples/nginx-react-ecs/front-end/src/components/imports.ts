@@ -1,9 +1,7 @@
-import Properties from "prop-types";
-
 import { Strings } from "../utilities";
 
 export * from "./imports";
 
-export { Properties, Strings };
+export { Strings };
 
-export default { Properties, Strings };
+export default Strings;

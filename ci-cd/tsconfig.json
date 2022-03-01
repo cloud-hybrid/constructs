@@ -19,7 +19,7 @@
         "allowUnreachableCode": true,
         "noUnusedParameters": true,
         "moduleResolution": "Node",
-        "diagnostics": true,
+        "diagnostics": false,
         "resolveJsonModule": true,
         "baseUrl": ".",
         "esModuleInterop": true,

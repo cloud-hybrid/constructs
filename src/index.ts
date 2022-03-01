@@ -1,5 +1,6 @@
 import * as AWS from  "@cdktf/provider-aws";
 import * as Null from "@cdktf/provider-null";
+import * as Random from "@cdktf/provider-random";
 import * as Docker from "@cdktf/provider-docker";
 
 export * from "./configuration";
@@ -13,4 +14,4 @@ export * from "./backend";
 export * from "./errors";
 export * from "./utility";
 
-export { AWS, Null, Docker };
+export { AWS, Null, Docker, Random };

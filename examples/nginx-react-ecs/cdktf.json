@@ -1,6 +1,6 @@
 {
     "language": "typescript",
-    "app": "node --no-warnings --enable-source-maps -r source-map-support/register --es-module-specifier-resolution node ./src",
+    "app": "node --no-warnings --enable-source-maps -r source-map-support/register --es-module-specifier-resolution node .",
     "terraformModules": [],
     "terraformProviders": [],
     "output": "distribution",

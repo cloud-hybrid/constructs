@@ -99,6 +99,3 @@ Process.chdir( CWD );
 }).finally(() => {
     Process.stdout.clearLine(0);
 });
-
-export {};
-export default {};

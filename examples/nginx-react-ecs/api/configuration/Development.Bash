@@ -6,7 +6,6 @@
 ### Author: Jacob B. Sanders
 
 openssl req -config "${PWD}/.ci/${1}.conf" -new -x509 -sha256 -newkey rsa:2048 -nodes -keyout "${PWD}/.ci/${1}.key" -days 1024 -out "${PWD}/.ci/${1}.crt"
-
 openssl pkcs12 -export -out "${PWD}/.ci/${1}.pfx" -inkey "${PWD}/.ci/${1}.key" -in "${PWD}/.ci/${1}.crt"
 
 ### MacOS

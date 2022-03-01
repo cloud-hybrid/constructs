@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Outlet, useLocation } from "react-router-dom";
 
-import { Notification } from "../components/notification/index";
+import { Notification } from "../components/notification";
 
 import { Text } from "../components/text";
 

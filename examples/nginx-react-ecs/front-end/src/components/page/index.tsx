@@ -1,9 +1,19 @@
-import { default as Content } from "./content";
-import { default as Component } from "./component";
+import "./index.scss";
 
-export { default as Content } from "./content";
-export { default as Component } from "./component";
+import Styles from "./index.module.scss";
 
-export default { Component, Content };
+import { Strings } from "../imports";
 
-export * from "./index";
+const Component = ( { name, children } ) => {
+    return (
+        <div id={ Strings.normalize(name, "Page", "Wrapper") } className={ Styles.component }>
+            {
+                children
+            }
+        </div>
+    );
+};
+
+export default Component;
+
+export { Component };

@@ -1,6 +1,7 @@
 /***
  * Name Normalization
- * ------------------
+ * ---
+ *
  * Takes any given input, and generates a machine-readable,
  * normalized, title-traincase'd string.
  *

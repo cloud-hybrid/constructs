@@ -1,11 +1,11 @@
 import React, { JSXElementConstructor, lazy as Split } from "react";
 
 /*** Code Splitting Page Content + Data Fetching */
-type $ = typeof import("./component").default;
+type $ = typeof import(".").Component;
 type Import = React.LazyExoticComponent<$>;
 
 /*** Split JSX Component */
-const Template: Import = Split(() => import("./component"));
+const Template: Import = Split(() => import("."));
 
 interface Properties {
     name: string;

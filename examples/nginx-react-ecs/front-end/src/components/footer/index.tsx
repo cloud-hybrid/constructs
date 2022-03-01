@@ -1,9 +1,13 @@
-import { default as Component } from "./component";
+import "./index.scss";
 
-export { default as Component } from "./component";
+import Styles from "./index.module.scss";
 
-export { Component as Footer } from "./component";
+const Component = () => {
+    return (
+        <footer className={ Styles.component }/>
+    )
+};
 
 export default Component;
 
-export * from "./index";
+export { Component as Footer };

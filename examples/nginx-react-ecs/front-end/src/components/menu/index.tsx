@@ -1,9 +1,18 @@
-import { default as Component } from "./component";
+import "./index.scss";
 
-export { default as Component } from "./component";
+import { Navigator } from "./navigation";
+import { Global } from "./title";
+import { Item } from "./item";
 
-export { Component as Menu } from "./component";
+const Component = () => {
+    return (
+        <Navigator>
+            <Global prefix={ "Cloud" } title={ "Hybrid" }/>
+            <Item title={ "Settings" }/>
+        </Navigator>
+    );
+};
 
 export default Component;
 
-export * from "./index";
+export { Component as Menu };

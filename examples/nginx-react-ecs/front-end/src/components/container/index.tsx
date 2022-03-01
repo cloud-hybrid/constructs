@@ -1,9 +1,17 @@
-import { default as Component } from "./component";
+import "./index.scss";
 
-export { default as Component } from "./component";
+import Styles from "./index.module.scss";
 
-export { Component as Container } from "./component";
+const Component = ( { children = null } ) => {
+    return (
+        <main className={ Styles.component }>
+            {
+                children
+            }
+        </main>
+    )
+};
 
 export default Component;
 
-export * from "./index";
+export { Component as Container };

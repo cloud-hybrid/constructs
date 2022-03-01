@@ -9,9 +9,8 @@ import * as Subprocess   from "child_process";
 import { Construct }                                                   from "constructs";
 import { App, TerraformStack, TerraformOutput, TerraformOutputConfig } from "cdktf";
 import { Container, ContainerUpload, Image, DockerProvider }           from "@cdktf/provider-docker";
-import Distribution                                                    from "./utility/distribution";
 
-import { Walker } from "./utility/index.js";
+import { Walker } from "./distribution";
 
 const TF = TerraformStack;
 
@@ -165,13 +164,13 @@ class Stack extends TerraformStack implements Data {
 
         Process.chdir( Path.dirname( this.target[0] ) );
         const web = new Walker( this.target[0], true );
-        web.copy( this.build[0], this.artifacts[0], true );
+        web.copy( this.build[0], this.artifacts[0] );
         Process.chdir( this.pwd );
         web.accumulate( String( this.artifacts[0] ) );
 
         Process.chdir( Path.dirname( this.target[1] ) );
         const api = new Walker( this.target[1], true );
-        api.copy( this.build[1], this.artifacts[1], true );
+        api.copy( this.build[1], this.artifacts[1] );
         Process.chdir( this.pwd );
         api.accumulate( String( this.artifacts[1] ) );
 
@@ -240,7 +239,7 @@ const pwd = Path.dirname( mwd );
 
 const artifacts = (target: string) => Path.join( pwd, target, "artifacts" );
 
-await Distribution.remove( artifacts("front-end"), 5, true, true );
+await Walker.remove( artifacts("front-end"), 5, true, true );
 
 const Application = new App( {
     skipValidation: false,

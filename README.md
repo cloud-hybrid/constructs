@@ -54,3 +54,8 @@ Simply, update the `package.json`'s `config` setting:
 ```
 
 The output directory defaults to `ci`;
+
+
+## References ##
+
+- [Community CDKTF Modules](https://github.com/Pocket/terraform-modules)

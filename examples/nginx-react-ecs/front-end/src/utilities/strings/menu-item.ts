@@ -1,6 +1,6 @@
 /***
  * Menu Item Path Normalization
- * ----------------------------
+ * ---
  *
  * @param input {string} Singleton Requirement
  * @param inputs {string[]} Additional String(s)

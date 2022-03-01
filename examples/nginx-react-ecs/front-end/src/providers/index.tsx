@@ -1,7 +1,15 @@
-import { Theme } from "./theme";
+import React from "react";
 
-export { default as Theme } from "./theme";
+type Context = React.Context<{ Theme: string }>;
 
-export default {
-    Theme
+const Theme = ( theme = "dark" ) => {
+    const $: Context = React.createContext({
+        Theme: theme
+    });
+
+    return $;
 };
+
+export default Theme;
+
+export { Theme };

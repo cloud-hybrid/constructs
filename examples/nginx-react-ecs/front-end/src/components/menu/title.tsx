@@ -2,8 +2,6 @@ import "./index.scss";
 
 import Styles from "./index.module.scss";
 
-import Properties from "prop-types";
-
 import { Link } from "react-router-dom";
 
 const Component = ( { path = "/", prefix, title } ) => {
@@ -21,21 +19,6 @@ const Component = ( { path = "/", prefix, title } ) => {
             </span>
         </Link>
     );
-};
-
-Component.propTypes = {
-    /*** Global Root Path. Defaults to `"/"` */
-    path: Properties.string,
-    
-    /*** Global Header Title, Prefix */
-    prefix: Properties.string.isRequired,
-
-    /*** Global Header Title, Text */
-    title: Properties.string.isRequired
-};
-
-Component.defaultProps = {
-    path: "/"
 };
 
 export default Component;
