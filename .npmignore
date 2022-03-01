@@ -31,3 +31,5 @@ tsconfig.tsbuildinfo
 .terraform.tfstate
 .terraform.tfstate.backup
 .terraform.tfstate.backup.*
+
+coverage

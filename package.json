@@ -1,7 +1,7 @@
 {
     "name": "cloud-iac",
     "private": false,
-    "version": "0.7.173",
+    "version": "0.7.174",
     "type": "module",
     "types": "index.d.ts",
     "main": "index.js",
