@@ -1,3 +1,9 @@
+import * as AWS from "@cdktf/provider-aws";
+
+import { ID }                         from "./utility/index.js";
+import { Construct }                  from "./configuration.js";
+import { Base, Store, Output, State } from "./resource.js";
+
 interface Input {
     /*** (Optional) Description of the secret. */
     readonly description?: Configuration["description"];
@@ -60,7 +66,7 @@ class Resource extends Construct implements Base {
      *
      */
 
-    private static type( scope, id: string, configuration: Input ): Type {
+    private static type( scope: Construct, id: string, configuration: Input ): Type {
         const settings = Resource.mapping( configuration );
 
         return new Reference( scope, id, { ... settings } );
@@ -145,12 +151,6 @@ class Resource extends Construct implements Base {
         return new Store( scope, id, settings );
     }
 }
-
-import * as AWS from "@cdktf/provider-aws";
-
-import { ID }                         from "./utility";
-import { Construct }                  from "./configuration";
-import { Base, Store, Output, State } from "./resource";
 
 export { Resource };
 export default Resource;

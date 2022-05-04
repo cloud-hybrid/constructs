@@ -11,15 +11,12 @@
         "synth": "cdktf synth",
         "deploy": "cdktf deploy",
         "start": "npm run initialize",
-        "initialize": "node --no-warnings --enable-source-maps -r source-map-support/register --es-module-specifier-resolution node ."
+        "initialize": "node --es-module-specifier-resolution node ."
     },
     "dependencies": {
-        "@cloud-technology/constructs": "../..",
-        "typescript": "^4.5.5"
+        "cloud-iac": "^0.7.187"
     },
     "devDependencies": {
-        "source-map-support": "latest",
-        "@types/node": "latest",
-        "@types/source-map-support": "latest"
+        "@types/node": "latest"
     }
 }

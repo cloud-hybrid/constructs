@@ -1,3 +1,3 @@
-export * from "./remote";
-export * from "./gitlab";
-export * from "./s3";
+export * from "./remote.js";
+export * from "./gitlab.js";
+export * from "./s3.js";

@@ -1,5 +1,7 @@
-import * as Prompt from "./question";
+import * as Prompt from "./question.js";
 
-export * from "./question";
+export * from "./question.js";
+
+export { Prompt };
 
 export default Prompt;

@@ -4,7 +4,7 @@ import Process from "process";
 
 import { Parameter } from "@cloud-technology/parameter";
 
-import { AWS, Base, Construct, ID, Output, State, Store } from "..";
+import { AWS, Base, Construct, ID, Output, State, Store } from "../index.js";
 
 /***
  * SSM Parameter Configuration Settings
@@ -241,6 +241,8 @@ class Resource extends Construct implements Base {
     }
 }
 
-export { Resource, Input };
+export type { Input };
+
+export { Resource };
 
 export default Resource;

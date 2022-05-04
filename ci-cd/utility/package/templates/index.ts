@@ -7,3 +7,5 @@ export * from "./typescript.js";
 import { default as Colors } from "../ansi/index.js";
 
 export { Colors as ANSI };
+
+/// module.exports = { Colors }

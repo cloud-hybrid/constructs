@@ -35,6 +35,8 @@ class Resource extends Construct {
     }
 }
 
-export { Resource, Input };
+export type { Input };
+
+export { Resource };
 
 export default Resource;

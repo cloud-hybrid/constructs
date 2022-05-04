@@ -28,7 +28,7 @@ const Directory = (): Promise<{
     Status: Number;
 }> =>
     new Promise((resolve) => {
-        const $: { Data: BufferConstructor; Error: Error; Status: Number } = {
+        const $: { Data: BufferConstructor; Error: Error | null; Status: Number } = {
             Data: Buffer,
             Error: null,
             Status: -1,

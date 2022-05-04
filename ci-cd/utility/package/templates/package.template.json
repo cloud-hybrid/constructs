@@ -4,22 +4,22 @@
     "version": "0.0.1",
     "type": "module",
     "main": "main.js",
-    "types": "main.ts",
+    "types": "main.d.ts",
     "scripts": {
+        "start": "ts-node .",
         "build": "tsc",
-        "compile": "tsc --watch",
         "get": "cdktf get",
         "synth": "cdktf synth",
-        "deploy": "cdktf deploy",
-        "start": "npm run initialize",
-        "initialize": "node --no-warnings --enable-source-maps -r source-map-support/register --es-module-specifier-resolution node ."
+        "deploy": "cdktf deploy"
     },
     "dependencies": {
         "{{ Self }}": "{{ Version }}"
     },
     "devDependencies": {
-        "source-map-support": "latest",
+        "@swc/core": "latest",
+        "@swc/helpers": "latest",
         "@types/node": "latest",
-        "@types/source-map-support": "latest"
+        "typescript": "latest",
+        "ts-node": "latest"
     }
 }

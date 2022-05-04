@@ -1,7 +1,7 @@
 import { TerraformAsset }                              from "cdktf";
 import { Construct }                                   from "constructs";
-import { Resource }                                    from "@cdktf/provider-null/lib/resource";
-import { DataAwsEcrAuthorizationToken, EcrRepository } from "@cdktf/provider-aws/lib/ecr";
+import { Resource }                                    from "@cdktf/provider-null/lib/resource.js";
+import { DataAwsEcrAuthorizationToken, EcrRepository } from "@cdktf/provider-aws/lib/ecr/index.js";
 
 import FS      from "fs";
 import Path    from "path";

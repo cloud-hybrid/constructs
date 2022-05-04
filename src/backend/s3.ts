@@ -1,4 +1,6 @@
-import { Client } from "../secrets-manager";
+import { Client } from "../secrets-manager.js";
+
+import { S3Backend } from "cdktf";
 
 interface Bucket {
     /*** S3 Bucket Name - Required */
@@ -54,7 +56,11 @@ class S3 implements Bucket {
         this.workspaceKeyPrefix = input?.workspaceKeyPrefix;
     }
 
-    static async initialize (){
+    public static async instantiate (settings: Bucket) {
+        return new S3(settings);
+    }
+
+    public static async initialize (){
         return new S3(await Client.get( S3.secret ))
     }
 }

@@ -1,11 +1,11 @@
 .tf
+.swc
 .idea
 .vscode
 
 ci
 test
 examples
-distribution
 
 .gitlab-id
 .gitlab-token

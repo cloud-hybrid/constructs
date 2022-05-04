@@ -1,4 +1,3 @@
-import Chalk   from "chalk";
 import FS      from "fs";
 import Path    from "path";
 import Process from "process";
@@ -33,7 +32,7 @@ class Base extends Distribution {
 
     protected readonly template: Template;
 
-    private readonly folder: string;
+    protected readonly folder: string;
 
     /***
      * @param {string} url - Required, ESM's `import.meta.url`
@@ -41,7 +40,7 @@ class Base extends Distribution {
      * @param {string} directory - Required, target output directory
      * @param {string} overload - Optional, force a target file name
      */
-    public constructor( url: string, type: Options, directory: string, overload?: string ) {
+    public constructor( url: string, type: Options, directory: string, overload?: string | null ) {
         super( false );
 
         this.folder = directory;
@@ -57,7 +56,7 @@ class Base extends Distribution {
         if ( !FS.existsSync( this.template.file ) ) {
             const $ = new Error( "Unable to Find Template File" );
 
-            $.name = Chalk.red.bold( "Template-Not-Found-Exception" );
+            $.name = "Template-Not-Found-Exception";
 
             Reflect.set( $, "pwd", Process.cwd() );
             Reflect.set( $, "source", this.source );
@@ -78,6 +77,10 @@ class Base extends Distribution {
     private readonly resolve = ( file: string = this.file ) => Path.join( Process.cwd(), this.folder, file );
 }
 
-export { Base, Options, Type };
+export { Base, Type };
 
-export default Base;
+export type { Options };
+
+export default { Base, Type };
+
+/// module.exports = { Base, Type };

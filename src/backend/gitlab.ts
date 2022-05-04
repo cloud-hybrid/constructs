@@ -1,8 +1,8 @@
 import { Construct } from "constructs";
 
-import { HTTP, Remote } from ".";
+import { HTTP, Remote } from "./index.js";
 
-import { Client } from "../secrets-manager";
+import { Client } from "../secrets-manager.js";
 
 enum Environment {
     Development = "Development",

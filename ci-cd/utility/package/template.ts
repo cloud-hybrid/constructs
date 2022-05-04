@@ -1,10 +1,9 @@
+import Chalk   from "chalk";
 import FS      from "fs";
 import Utility from "util";
 import Process from "process";
 
-import Chalk from "chalk";
-
-import { ANSI } from "./index.js";
+import { ANSI, Injectable } from "./index.js";
 
 interface Expression {
     pattern: string;
@@ -161,7 +160,7 @@ class Template {
      */
     public constructor( file: string, debug?: boolean ) {
         this.file = file;
-        this.debug = debug ?? (Process.env?.["debug"] === "true") ?? false;
+        this.debug = debug ?? ( Process.env?.["debug"] === "true" ) ?? false;
     }
 
     /***
@@ -169,49 +168,55 @@ class Template {
      * @async
      *
      * @see {@link Template}
+     * @param file
      * @param {Expressions} expressions
      * @returns {Promise<string>}
      */
-    public async inject( expressions?: Expressions ): Promise<string> {
-        this.buffer = await Template.read( this.file );
+    public async inject( source: string, target: string, expressions?: Expressions ): Promise<void> {
+        this.buffer = await Template.read( source );
 
-        ( expressions ) && expressions.forEach( ( $, index, array ) => {
-            // Pattern := Key
-            this.pattern = $.pattern;
-            // Replacement := Value
-            this.replacement = $.replacement;
+        if ( expressions ) {
+            let counter = 0;
+            const total = expressions.length;
+            for await ( const expression of expressions ) {
+                counter += 1;
 
-            const contents = String( this.buffer );
-            const match = Template.keys( this.pattern ).exec( contents );
+                // Pattern := Key
+                this.pattern = expression.pattern;
+                // Replacement := Value
+                this.replacement = expression.replacement;
 
-            if ( match && this.pattern && this.replacement ) {
-                const leading = Chalk.bold( ANSI( "Bright-Yellow", match[0].substring( 0, 2 ) ) );
-                const trailing = Chalk.bold( ANSI( "Bright-Yellow", match[0].substring( match[0].length - 2, match[0].length ) ) );
-                const variable = Chalk.bold( ANSI( "Bright-Red", match[0].substring( 2, match[0].length - ( 2 ) ).trim() ) );
+                const contents = String( this.buffer );
+                const match = Template.keys( this.pattern ).exec( contents );
 
-                const preface = Chalk.gray( String( this.buffer ).replaceAll(
-                    match[0], leading + " " + variable + " " + trailing
-                ) );
+                if ( match && this.pattern && this.replacement ) {
+                    const leading = Chalk.bold( ANSI( "Bright-Yellow", match[0].substring( 0, 2 ) ) );
+                    const trailing = Chalk.bold( ANSI( "Bright-Yellow", match[0].substring( match[0].length - 2, match[0].length ) ) );
+                    const variable = Chalk.bold( ANSI( "Bright-Red", match[0].substring( 2, match[0].length - ( 2 ) ).trim() ) );
 
-                /// Only for Debugging Purposes - complexity can be functionally disregarded
-                ( this.debug ) && Process.stdout.write( Chalk.bold( "  — " ) + "Template Content" + " " + "(" + ( index + 1 ) + "/" + array.length + ")" + ":" + preface.split( "\n" ).map( ( $,
-                    index ) => ( index ) !== 0 && "  " + $ || " " + $ ).join( "\n" ) + "\n" );
+                    const preface = Chalk.gray( String( this.buffer ).replaceAll(
+                        match[0], leading + " " + variable + " " + trailing
+                    ) );
 
-                this.colorize = contents.replaceAll( match[0], Chalk.bold.underline( ANSI( "Green", this.replacement ) ) );
-                this.template = contents.replaceAll( match[0], this.replacement );
+                    /// Only for Debugging Purposes - complexity can be functionally disregarded
+                    ( this.debug ) && Process.stdout.write( Chalk.bold( "  — " ) + "Template Content" + " " + "(" + ( counter ) + "/" + total + ")" + ":" + preface.split( "\n" ).map( ( $,
+                        index ) => ( index ) !== 0 && "  " + $ || " " + $ ).join( "\n" ) + "\n" );
 
-                /// Only for Debugging Purposes - complexity can be functionally disregarded
-                ( this.debug ) && Process.stdout.write( Chalk.bold( "  — " ) + "Hydration" + " " + "(" + ( index + 1 ) + "/" + array.length + ")" + ":" + " " + Chalk.gray( this.colorize.split( "\n" ).map( ( $,
-                    index ) => ( index ) !== 0 && "  " + $ || " " + $ ).join( "\n" ) ) + "\n" );
+                    this.colorize = contents.replaceAll( match[0], Chalk.bold.underline( ANSI( "Green", this.replacement ) ) );
+                    this.template = contents.replaceAll( match[0], this.replacement );
 
-                this.output = this.template;
+                    /// Only for Debugging Purposes - complexity can be functionally disregarded
+                    ( this.debug ) && Process.stdout.write( Chalk.bold( "  — " ) + "Hydration" + " " + "(" + ( counter ) + "/" + total + ")" + ":" + " " + Chalk.gray( this.colorize.split( "\n" ).map( ( $,
+                        index ) => ( index ) !== 0 && "  " + $ || " " + $ ).join( "\n" ) ) + "\n" );
 
-                this.update( Buffer.from( this.template ) );
+                    this.output = this.template;
+
+                    this.update( Buffer.from( this.template ) );
+
+                    await Injectable.write( target, String( this.buffer ) );
+                }
             }
-        } );
-
-        return String( this.buffer );
-
+        }
     }
 
     /***
@@ -223,44 +228,33 @@ class Template {
      */
     public populate( expressions?: Expressions ): string {
         this.buffer = FS.readFileSync( this.file );
-
         ( expressions ) && expressions.forEach( ( $, index, array ) => {
             // Pattern := Key
             this.pattern = $.pattern;
             // Replacement := Value
             this.replacement = $.replacement;
-
             const contents = String( this.buffer );
             const match = Template.keys( this.pattern ).exec( contents );
-
             if ( match && this.pattern && this.replacement ) {
                 const leading = Chalk.bold( ANSI( "Bright-Yellow", match[0].substring( 0, 2 ) ) );
                 const trailing = Chalk.bold( ANSI( "Bright-Yellow", match[0].substring( match[0].length - 2, match[0].length ) ) );
                 const variable = Chalk.bold( ANSI( "Bright-Red", match[0].substring( 2, match[0].length - ( 2 ) ).trim() ) );
-
                 const preface = Chalk.gray( String( this.buffer ).replaceAll(
                     match[0], leading + " " + variable + " " + trailing
                 ) );
-
                 /// Only for Debugging Purposes - complexity can be functionally disregarded
                 ( this.debug ) && Process.stdout.write( Chalk.bold( "  — " ) + "Template Content" + " " + "(" + ( index + 1 ) + "/" + array.length + ")" + ":" + preface.split( "\n" ).map( ( $,
                     index ) => ( index ) !== 0 && "  " + $ || " " + $ ).join( "\n" ) + "\n" );
-
                 this.colorize = contents.replaceAll( match[0], Chalk.bold.underline( ANSI( "Green", this.replacement ) ) );
                 this.template = contents.replaceAll( match[0], this.replacement );
-
                 /// Only for Debugging Purposes - complexity can be functionally disregarded
                 ( this.debug ) && Process.stdout.write( Chalk.bold( "  — " ) + "Hydration" + " " + "(" + ( index + 1 ) + "/" + array.length + ")" + ":" + " " + Chalk.gray( this.colorize.split( "\n" ).map( ( $,
                     index ) => ( index ) !== 0 && "  " + $ || " " + $ ).join( "\n" ) ) + "\n" );
-
                 this.output = this.template;
-
                 this.update( Buffer.from( this.template ) );
             }
         } );
-
         return String( this.buffer );
-
     }
 
     private update( content: Buffer | string ) {

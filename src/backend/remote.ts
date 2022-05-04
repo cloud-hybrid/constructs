@@ -33,6 +33,8 @@ class Remote implements Backend {
     }
 }
 
-export { Remote, Backend, HTTP };
+export type { Backend };
+
+export { Remote, HTTP };
 
 export default Remote;

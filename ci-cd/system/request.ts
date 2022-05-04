@@ -22,31 +22,50 @@ import URI from "url";
 
 import HTTPs from "https";
 
-/*** Example Backend Module */
+type Headers = { [$: string]: string };
 
 /***
+ * `GET` HTTP Request
+ * ---
+ *
+ * Please do not use directly; see {@link get} for usage.
  *
  * @param {string} uri
  * @param {{}} headers
  * @param {Function} resolve
  * @param {Function} reject
- *
  * @constructor
  *
  */
 
-const GET = ( uri: string, headers = {}, resolve: Function, reject: Function ) => {
-    const $: { body: Buffer | string | null, data: string } = { body: "", data: "" };
+const GET = ( uri: string, headers: Headers = {}, resolve: Function, reject: Function ) => {
+    const $: { body: Buffer | string | null, data: string, headers: { request: {}, response: {} } } = { body: "", data: "", headers: { request: {}, response: {} } };
 
-    const options = URI.urlToHttpOptions( new URL( uri ) );
+    const options = {
+        ... {
+            protocol: "https" + ":",
+            port: 443,
+            rejectUnauthorized: false,
+            requestCert: true,
+            followAllRedirects: true,
+            encoding: "utf-8",
+            agent: false,
+            method: "GET",
+            headers: { ... { "Content-Type": "application/json" }, ... headers }
+        }, ... URI.urlToHttpOptions( new URI.URL( uri ) )
+    };
 
-    options.headers = { ... options.headers, ... headers };
+    $.headers.request = { ... { "Content-Type": "application/json" }, ... headers };
 
-    HTTPs.get( options, ( response ) => {
+    options.headers = { ... $.headers.request };
+
+    const request = HTTPs.request( options, ( response ) => {
         /// HTTP Redirect(s)
         if ( response.statusCode === 301 || response.statusCode === 302 ) {
             return GET( response.headers.location as string, headers, resolve, reject );
         }
+
+        $.headers.response = response.headers;
 
         response.on( "error", ( error ) => {
             reject( error );
@@ -57,13 +76,46 @@ const GET = ( uri: string, headers = {}, resolve: Function, reject: Function ) =
         } );
 
         response.on( "end", () => {
-            resolve( JSON.parse( String( $.body ) ) );
+            $.headers.response = response.headers;
+
+            try {
+                $.data = JSON.parse( String( $.body ) );
+            } catch ( e ) {
+                console.warn( "[Warning] Unable to Parse Body" );
+                console.trace( "[Error] Error Object" + ":", e );
+                /// throw e;
+
+                $.data = String( $.body );
+            }
         } );
     } );
+
+    request.on( "error", ( error ) => {
+        reject( error );
+    } );
+
+    request.on( "close", () => {
+        resolve( $ );
+    } );
+
+    request.end();
 };
 
+/***
+ * `POST` HTTP Request
+ * ---
+ *
+ * Please do not use directly; see {@link post} for usage.
+ *
+ * @param {string} uri
+ * @param {string} data
+ * @param {{}} headers
+ * @param {Function} resolve
+ * @param {Function} reject
+ * @constructor
+ */
 const POST = ( uri: string, data: string, headers = {}, resolve: Function, reject: Function ) => {
-    const $: { body: string[], data: string } = { body: [], data: "" };
+    const $: { body: string[], data: string, headers: { request: {}, response: {} } } = { body: [], data: "", headers: { request: {}, response: {} } };
 
     const options = {
         ... {
@@ -80,8 +132,12 @@ const POST = ( uri: string, data: string, headers = {}, resolve: Function, rejec
                     "Content-Type": "application/json", "Content-Length": Buffer.byteLength( data )
                 }, ... headers
             }
-        }, ... URI.urlToHttpOptions( new URL( uri ) )
+        }, ... URI.urlToHttpOptions( new URI.URL( uri ) )
     };
+
+    options.headers = { ... options.headers, ... headers };
+
+    $.headers.request = options.headers;
 
     const request = HTTPs.request( options, ( response ) => {
         if ( response.statusCode === 301 || response.statusCode === 302 ) {
@@ -93,10 +149,16 @@ const POST = ( uri: string, data: string, headers = {}, resolve: Function, rejec
         } );
 
         response.on( "end", () => {
+            $.headers.response = response.headers;
+
             try {
                 $.data = JSON.parse( $.body.join() );
             } catch ( e ) {
                 console.warn( "[Warning] Unable to Parse Body" );
+                console.trace( "[Error] Error Object" + ":", e );
+                /// throw e;
+
+                $.data = String( $.body.join() );
             }
         } );
     } );
@@ -115,6 +177,8 @@ const POST = ( uri: string, data: string, headers = {}, resolve: Function, rejec
 };
 
 /***
+ * `GET` HTTP Request Interface
+ *
  * @param {string} url
  * @param {Headers} headers
  *
@@ -128,6 +192,8 @@ const get = ( url: string, headers: Headers ): Promise<{ body: string[], data: s
 };
 
 /***
+ * `POST` HTTP Request Interface
+ *
  * @param {string} url
  * @param {string} data
  * @param {Headers} headers
@@ -141,10 +207,10 @@ const post = ( url: string, data: string, headers: Headers ): Promise<{ body: st
     } );
 };
 
-type Headers = { [$: string]: string };
-
 export { get, post };
 
 export default { get, post };
 
 export type { Headers };
+
+module.exports = { get, post };

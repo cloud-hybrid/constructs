@@ -1,5 +1,4 @@
-import Chalk from "chalk";
-
+import Chalk   from "chalk";
 import FS      from "fs";
 import Module  from "module";
 import OS      from "os";
@@ -26,7 +25,7 @@ class Distribution {
     public readonly debug: boolean = false;
 
     /*** Module Type Composition */
-    public static readonly module = ( url: string = import.meta.url ) => $.initialize( url );
+    public static readonly module = ( url: string = import.meta.url /*__filename*/ ) => $.initialize( url );
 
     /*** Current Module Directory */
     protected static readonly cwd = Path.dirname( import.meta.url.replace( "file" + ":" + "//", "" ) );
@@ -90,8 +89,12 @@ class Distribution {
     public static readonly write = async ( file: string, content: string ) => {
         const $ = FS.writeFile;
 
-        return new Promise((resolve) => {
-            $( file, content, { encoding: "utf-8", mode: 0o664 }, () => {
+        return new Promise((resolve, reject) => {
+            $( file, content, { encoding: "utf-8", mode: 0o664 }, (error) => {
+                if (error) {
+                    reject(error);
+                }
+
                 resolve(true);
             } );
         });

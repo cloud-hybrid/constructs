@@ -1,18 +1,14 @@
-export * from "./stack";
+export * from "./stack.js";
 
-import * as Random from "../../distribution/providers/random";
+import Parameter from "./ssm-parameter.js";
 
-import Parameter from "./ssm-parameter";
-import { NGINX } from "./containerization";
+import { NGINX } from "./containerization/index.js";
 
-export * from "../../distribution/modules/terraform-aws-modules/aws/rds";
-export * from "../../distribution/modules/terraform-aws-modules/aws/vpc";
-
-export * from "./ecs";
-export * from "./database";
+export * from "./ecs/index.js";
+export * from "./database/index.js";
 
 const Resources = {
     Parameter, NGINX
 };
 
-export { Resources, Random };
+export { Resources };

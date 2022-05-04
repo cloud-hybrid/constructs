@@ -1,5 +1,5 @@
-import { S3Bucket, S3BucketObject, S3BucketPolicy } from "@cdktf/provider-aws/lib/s3";
-import { Resource }                                 from "@cdktf/provider-null/lib/resource";
+import { S3Bucket, S3BucketObject, S3BucketPolicy } from "@cdktf/provider-aws/lib/s3/index.js";
+import { Resource }                                 from "@cdktf/provider-null/lib/resource.js";
 import { TerraformAsset } from "cdktf";
 import { Construct }      from "constructs";
 

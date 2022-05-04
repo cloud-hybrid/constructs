@@ -1,14 +1,15 @@
-import { SecurityGroup } from "@cdktf/provider-aws/lib/vpc";
-import { Resource }      from "@cdktf/provider-null/lib/resource";
+import { Vpc, SecurityGroup } from "@cdktf/provider-aws/lib/vpc/index.js";
+import { RdsClusterInstance } from "@cdktf/provider-aws/lib/rds/index.js";
+import { Resource }      from "@cdktf/provider-null/lib/resource.js";
 import { Fn }            from "cdktf";
 import { Construct }     from "constructs";
 
-import { Random, Rds, Vpc } from "..";
+import * as Random from "@cdktf/provider-random";
 
 class PostgreSQL extends Resource {
     public static readonly port = 5432;
 
-    public instance: Rds;
+    public instance: RdsClusterInstance;
 
     constructor(
         scope: Construct,
@@ -25,7 +26,7 @@ class PostgreSQL extends Resource {
         } );
 
         const dbSecurityGroup = new SecurityGroup( this, "db-security-group", {
-            vpcId: Fn.tostring( vpc.vpcIdOutput ),
+            vpcId: Fn.tostring( vpc.id ),
             ingress: [
                 // allow traffic to the DBs port from the service
                 {
@@ -38,27 +39,12 @@ class PostgreSQL extends Resource {
         } );
 
         // Using this module: https://registry.terraform.io/modules/terraform-aws-modules/rds/aws/latest
-        this.instance = new Rds( this, "db", {
-            identifier: `${ name }-db`,
-
+        this.instance = new RdsClusterInstance( this, "db", {
+            clusterIdentifier: `${ name }-db`,
             engine: "postgres",
             engineVersion: "14.1",
-            family: "postgres14",
             instanceClass: "db.t3.micro",
-            allocatedStorage: "5",
-
-            createDbOptionGroup: true,
-            createDbParameterGroup: true,
-            applyImmediately: true,
-            port: String( PostgreSQL.port ),
-            username: "administrator",
-            password: password.result,
-
-            maintenanceWindow: "Mon:00:00-Mon:03:00",
-            backupWindow: "03:00-06:00",
-
-            subnetIds: vpc.databaseSubnetsOutput as unknown as any,
-            vpcSecurityGroupIds: [ dbSecurityGroup.id ]
+            applyImmediately: true
         } );
     }
 }

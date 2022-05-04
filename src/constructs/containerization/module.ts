@@ -1,1 +1,1 @@
-export { Resource as NGINX } from "./nginx";
+export { Resource as NGINX } from "./nginx.js";

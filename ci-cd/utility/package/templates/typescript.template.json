@@ -38,6 +38,12 @@
         "target": "ES2018",
         "diagnostics": true
     },
+    "ts-node": {
+        "swc": true,
+        "transpileOnly": true,
+        "preferTsExts": true,
+        "files": true
+    },
     "exclude": ["**/*.d.ts"],
     "include": ["**/*.ts"]
 }

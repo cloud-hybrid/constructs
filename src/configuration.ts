@@ -2,19 +2,22 @@ import Path    from "path";
 import Module  from "module";
 import Process from "process";
 
-import { AWS } from ".";
+import { AWS } from "./index.js";
 
 import { Construct } from "constructs";
 
 import { App, TerraformStack, TerraformOutput } from "cdktf";
 
-import { ID }                       from "./utility";
-import { Gitlab, VCS }              from "./backend/gitlab";
-import { Tags, Tagging, Input } from "./tags";
-import { Credentials, Credential }  from "./credentials";
-import * as UUID from "uuid"
+/// import { Gitlab, VCS }              from "./backend/gitlab.js";
 
-const $ = Path.dirname(Process.cwd());
+import { ID }                      from "./utility/index.js";
+import { S3 }                      from "./backend/s3.js";
+import type { Bucket }             from "./backend/s3.js";
+import { Tags, Tagging, Input }    from "./tags.js";
+import { Credentials, Credential } from "./credentials.js";
+import * as UUID                   from "uuid";
+
+const $ = Path.dirname( Process.cwd() );
 const Import = Module.createRequire( $ );
 
 class Configuration extends Construct {
@@ -29,7 +32,7 @@ class Configuration extends Construct {
      * @type {boolean}
      *
      */
-    public static readonly ci: boolean = (!process.stdout.isTTY && (process.env?.ci !== "true" ?? false));
+    public static readonly ci: boolean = ( !process.stdout.isTTY && ( process.env?.ci !== "true" ?? false ) );
 
     /***
      * Common tag identifiers that are propagated throughout all the resources
@@ -53,7 +56,7 @@ class Configuration extends Construct {
     public readonly name: string;
 
     /*** The Remote State Backend Type - A Construct Wrapper */
-    /// readonly backend: Gitlab;
+    backend?: Bucket; /// Gitlab;
 
     /*** The Remote State Backend - Used to Track Infrastructure State Across Team(s) & Organizations */
     /// readonly remote: VCS;
@@ -82,6 +85,13 @@ class Configuration extends Construct {
     public static tags( input: Input ) {
         return Tags.initialize( input );
     }
+
+    public async state() {
+        this.backend = await S3.instantiate({
+            bucket: "test-s3-state-bucket",
+            key: "test-key-folder-name"
+        });
+    }
 }
 
 /***
@@ -95,8 +105,8 @@ class Configuration extends Construct {
  * @constructor
  *
  */
-const Initialize = async function (path: string = Path.join(Process.cwd(), "configuration.json")) {
-    const Settings = Import(path);
+const Initialize = async function ( path: string = Path.join( Process.cwd(), "configuration.json" ) ) {
+    const Settings = Import( path );
 
     const tags = Configuration.tags( {
         tf: Settings.tf,
@@ -114,7 +124,7 @@ const Initialize = async function (path: string = Path.join(Process.cwd(), "conf
 
     Reflect.set( Initialize, "settings", Settings );
 
-    return ( scope: Construct, name: string ) => new Configuration( scope, name, tags, /* backend, Credentials */ );
+    return ( scope: Construct, name: string ) => new Configuration( scope, name, tags /* backend, Credentials */ );
 };
 
 const Application = App;

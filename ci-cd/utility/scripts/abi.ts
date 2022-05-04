@@ -14,8 +14,15 @@ import FS from "fs";
 import Path from "path";
 import Process from "process";
 
-/*** @private */
-function $(bin: string | FS.PathLike) {
+/***
+ * Path Expression Splitter
+ *
+ * @private
+ * @param {string | FS.PathLike} bin
+ * @returns {string[]}
+ */
+
+function $(bin: string | FS.PathLike): string[] {
     return ( Process.env.PATH || "" ).replace( /["]+/g, "" ).split( Path.delimiter ).map( (chunk) => {
         return ( Process.env.PATHEXT || "" ).split( Path.delimiter ).map( (ext) => {
             return Path.join( chunk, bin + ext );
@@ -25,7 +32,19 @@ function $(bin: string | FS.PathLike) {
     } );
 }
 
-const Binary = (bin: string | FS.PathLike) => {
+/***
+ * ABI Search Function
+ * ---
+ *
+ * Search System `${PATH}` for Executable File
+ *
+ * @param {string | FS.PathLike} bin
+ * @returns {boolean}
+ * @constructor
+ *
+ */
+
+const Search = (bin: string | FS.PathLike) => {
     const Target = $( bin );
     const Data = { Valid: false, Path: "" };
 
@@ -46,6 +65,8 @@ const Binary = (bin: string | FS.PathLike) => {
     return Data.Valid;
 };
 
-export { Binary };
+export { Search };
 
-export default Binary;
+export default { Search };
+
+module.exports = { Search }

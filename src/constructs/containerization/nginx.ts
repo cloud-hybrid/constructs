@@ -1,4 +1,4 @@
-import { ID, Docker, Construct } from ".";
+import { ID, Docker, Construct } from "./index.js";
 
 /***
  * @see {@link Type}
@@ -8,7 +8,7 @@ interface Input {
     protocol?: string;
     hostname?: string;
     uploads?: Docker.ContainerUpload[];
-    ports?: { internal: number, external: number, protocol: string, ip: string };
+    ports: { internal: number, external: number, protocol: string, ip: string };
 }
 
 /***
@@ -21,7 +21,7 @@ interface Input {
 class Resource extends Construct {
     public readonly url: string;
     public readonly image: Docker.Image;
-    public readonly container: Docker.Container;
+    public readonly container?: Docker.Container;
 
     public readonly configuration: Input;
 
@@ -69,6 +69,8 @@ class Resource extends Construct {
     }
 }
 
-export { Resource, Input };
+export type { Input };
+
+export { Resource };
 
 export default Resource;

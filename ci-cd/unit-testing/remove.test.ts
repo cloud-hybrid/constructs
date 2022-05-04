@@ -9,7 +9,7 @@ const Data = {
     $: "test-remove-target-directory",
     0: () => Data.File("0.json"),
     Directory: () => Path.join(Process.cwd(), Data[ "$" ]),
-    File: (file) => Path.join(Data.Directory(), file)
+    File: (file: string) => Path.join(Data.Directory(), file)
 };
 
 const Main = async () => {

@@ -8,12 +8,8 @@ import Subprocess from "child_process";
 
 import Chalk from "chalk";
 
-// ECMAScript 2015
-import "source-map-support/register.js";
-
 import * as Utility from "./utility/index.js";
 
-const CWD = Process.cwd();
 const Parameters = Process.argv.splice( 2 ).map( ( $ ) => $.toLowerCase() );
 const Interactive = Parameters.includes( "-i" ) || Parameters.includes( "-I" ) || Parameters.includes( "--interactive" ) || Parameters.includes( "interactive" );
 const Debug = Parameters.includes( "--debug" ) || Parameters.includes( "debug" ) || Parameters.includes( "--verbose" ) || Parameters.includes( "verbose" );
@@ -52,7 +48,7 @@ Process.stdout.write( "\n" );
 const installation = Chalk.magentaBright.bold( "Installing" );
 console.log( "[Log]" + " " + installation + " " + "Dependencies ... " );
 
-( Package ) && await Utility.Spawn( "npm install --no-fund ." );
+( Package ) && await Utility.Spawn( "npm install --silent" );
 
 Process.stdout.write( "\n" );
 
@@ -77,12 +73,12 @@ switch ( Interactive ) {
         const initialize = Chalk.cyanBright.bold( "Running" );
         console.log( "[Log]" + " " + initialize + " " + Chalk.italic( "Interactive" ) + " " + "First-Time Setup" );
 
-        await Utility.Spawn( "npm run initialize -- --reconfigure" );
+        await Utility.Spawn( "npm run start -- --reconfigure" );
 
         break;
     }
     case false: {
-        const initialize = Chalk.redBright.underline.bold( "cd ./ci && npm run initialize" );
+        const initialize = Chalk.redBright.underline.bold( "cd ./ci && npm run start" );
         console.log( Chalk.bold( "Lastly" ) + "," + " " + Chalk.italic( "Execute the Following to Finish Setup" ) );
         console.log( "  ↳ " + initialize );
 
@@ -91,8 +87,6 @@ switch ( Interactive ) {
 }
 
 Process.stdout.write( "\n" );
-
-Process.chdir( CWD );
 
 (Creator) && import("open").then( ( $ ) => $.default( "https://github.com/segmentational", { wait: false } ) ).finally(() => {
     Process.stdout.write(Utility.ANSI("Bright-Green", "Web Browser has Successfully Opened" + "\n" + "\n"));

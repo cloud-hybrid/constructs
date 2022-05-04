@@ -1,8 +1,7 @@
 import FS      from "fs";
-import Path    from "path";
 import Process from "process";
 
-import Prompt, { Question, Validation } from "./utility/question";
+import Prompt, { Question, Validation } from "./utility/question/index.js";
 
 import { AwsProviderDefaultTags } from "@cdktf/provider-aws";
 

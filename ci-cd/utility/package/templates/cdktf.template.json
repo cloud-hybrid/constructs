@@ -1,6 +1,6 @@
 {
     "language": "typescript",
-    "app": "tsc && node --no-warnings --enable-source-maps -r source-map-support/register --es-module-specifier-resolution node .",
+    "app": "tsc && ts-node .",
     "terraformModules": [],
     "terraformProviders": [
         "aws"

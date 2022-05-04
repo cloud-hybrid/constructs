@@ -37,8 +37,8 @@ interface Module {
     /*** Relative Path from Process.cwd() to Target */
     relative: string | PathLike | undefined;
 
-    package: { $: string; directory: string; };
-    parent: { $: string; directory: string; };
+    package: { $: string; directory: string; } | null;
+    parent: { $: string; directory: string; } | null;
 }
 
 /***
@@ -77,7 +77,9 @@ class Module implements Module {
         this.name = this.basename.replace(this.extension, "");
 
         this.package = this.source();
-        this.parent = this.source(Path.dirname(this.package.directory));
+        this.parent = (this.package) ?
+            this.source(Path.dirname(this.package.directory))
+            : null;
     }
 
     public static initialize( self: string ): Module {
@@ -94,10 +96,14 @@ class Module implements Module {
      * @param {string} path
      * @private
      */
-    private source( path: string = Path.dirname( this.uri ) ): { $: string; directory: string; } {
-        const $ = Scanner.scandirSync( path ).filter( ( $ ) => $.name === "package.json" ).map( ( $ ) => $ );
+    private source( path: string = Path.dirname( this.uri ) ): { $: string; directory: string; } | null {
+        try {
+            const $ = Scanner.scandirSync( path ).filter( ( $ ) => $.name === "package.json" ).map( ( $ ) => $ );
 
-        return ( $.length > 0 ) ? { $: $[0].path, directory: Path.dirname( $[0].path ) } : this.source( Path.dirname( path ) );
+            return ( $.length > 0 ) ? { $: $[0].path, directory: Path.dirname( $[0].path ) } : this.source( Path.dirname( path ) );
+        } catch (error) {
+            return null;
+        }
     }
 }
 

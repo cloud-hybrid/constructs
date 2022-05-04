@@ -4,7 +4,7 @@ import { TerraformOutput, TerraformOutputConfig } from "cdktf";
 
 const Store = TerraformOutput;
 
-import { Configuration } from "./configuration";
+import { Configuration } from "./configuration.js";
 
 /***
  * A Base Construct Implementation
@@ -73,7 +73,7 @@ class Base extends Construct {
  */
 type Type = any;
 
-type State = TerraformOutput;
+type State = TerraformOutput | null;
 type Output = TerraformOutputConfig;
 
 export { Base, Store };

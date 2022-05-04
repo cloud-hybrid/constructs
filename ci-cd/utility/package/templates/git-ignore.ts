@@ -1,4 +1,4 @@
-import { Raw } from "../index.js";
+import { Main, Raw } from "../index.js";
 
 /***
  * Extension of {@link Raw}
@@ -10,7 +10,7 @@ class Ignore extends Raw {
      */
 
     constructor() {
-        super( import.meta.url, "tpl", ".gitignore" );
+        super( import.meta.url /* __filename */, "tpl", ".gitignore" );
     }
 
     /***
@@ -25,3 +25,5 @@ class Ignore extends Raw {
 export { Ignore };
 
 export default Ignore;
+
+/// module.exports = { Ignore };

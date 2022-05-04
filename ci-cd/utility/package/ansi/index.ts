@@ -1,6 +1,7 @@
 import Type from "./color/colors";
 
-export * from "./index.js";
+import { Module } from "./module.js";
+
 export * from "./module.js";
 export * from "./implementation.js";
 export * from "./modifier.js";
@@ -10,6 +11,6 @@ export * from "./type.js";
 
 export * from "./color/index.js";
 
-const Colors = await import("./module.js").then( ($) => new $.Module() );
+const Colors = new Module();
 
 export default (color: Type, content: string) => Colors.string( color, content );

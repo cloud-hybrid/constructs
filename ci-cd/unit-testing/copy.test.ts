@@ -16,18 +16,22 @@ const Clean = async () => {
     });
 };
 
-test("Copy Unit-Test", async () => {
-    const $ = Utility.promisify(FS.exists);
+const Main = async () => {
+    test.skip("Copy Unit-Test", async () => {
+        const $ = Utility.promisify(FS.exists);
 
-    await Copy("node_modules", "test-target-directory");
+        await Copy("node_modules", "test-target-directory");
 
-    expect(await $(Path.join(Process.cwd(), "test-target-directory"))).toBe(true);
-});
+        expect(await $(Path.join(Process.cwd(), "test-target-directory"))).toBe(true);
+    });
 
-test("Clean-Up", async () => {
-    const $ = Utility.promisify(FS.exists);
+    test.skip("Clean-Up", async () => {
+        const $ = Utility.promisify(FS.exists);
 
-    await Clean();
+        await Clean();
 
-    expect(await $(Path.join(Process.cwd(), "test-target-directory"))).toBe(false);
-});
+        expect(await $(Path.join(Process.cwd(), "test-target-directory"))).toBe(false);
+    });
+};
+
+(async () => await Main())();

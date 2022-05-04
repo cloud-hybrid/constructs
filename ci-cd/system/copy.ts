@@ -77,4 +77,4 @@ const Copy = async ( source: string, target: string ) => {
 
 export { Copy };
 
-export default Copy;
+export default { Copy };

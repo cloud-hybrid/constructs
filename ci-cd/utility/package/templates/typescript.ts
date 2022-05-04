@@ -1,4 +1,4 @@
-import { Raw } from "../index.js";
+import { Main, Raw } from "../index.js";
 
 /***
  * Extension of {@link Raw}
@@ -10,7 +10,7 @@ class Typescript extends Raw {
      */
 
     constructor() {
-        super( import.meta.url, "json", "tsconfig.json" );
+        super( import.meta.url /* __filename */, "json", "tsconfig.json" );
     }
 
     /***
@@ -24,4 +24,6 @@ class Typescript extends Raw {
 
 export { Typescript };
 
-export default Typescript;
+export default { Typescript };
+
+/// module.exports = { Typescript };

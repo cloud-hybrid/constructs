@@ -4,10 +4,10 @@ import Process   from "process";
 import Assertion from "assert";
 import Utility   from "util";
 
-import { Tags }       from "..";
-import type { Input } from "..";
+import { Tags }       from "../index.js";
+import type { Input } from "../index.js";
 
-import { Application, TF, Construct, Configuration, ID, Initialize } from "../configuration";
+import { Application, TF, Construct, Configuration, ID, Initialize } from "../configuration.js";
 
 type Settings = ( scope: Construct, name: string ) => Configuration;
 
@@ -52,7 +52,7 @@ const Synthesize = async (Infrastructure: any) => {
     // of any given CDK runtime is short and intended only to run its entry-point once,
     // `Initialize` will assign a `settings` attribute to itself.
     //
-    // In doing so, `factory` functionally achieves an abstract, exportable means of wrapping
+    // In doing so, the callable achieves an abstract, exportable means of wrapping
     // Constructs + Stacks with a default and reusable backend + configuration, while being
     // capable of prompting its users, dynamically, for input if the configuration is found
     // to need modification.
@@ -80,4 +80,6 @@ const Synthesize = async (Infrastructure: any) => {
     return instance;
 };
 
-export { Synthesize, TF, Stack, Settings, Construct, Configuration };
+export { Synthesize, TF, Stack, Construct, Configuration };
+
+export type { Settings };

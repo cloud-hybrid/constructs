@@ -1,7 +1,7 @@
-import { CloudwatchLogGroup }            from "@cdktf/provider-aws/lib/cloudwatch";
-import { EcsCluster, EcsTaskDefinition } from "@cdktf/provider-aws/lib/ecs";
-import { IamRole }                       from "@cdktf/provider-aws/lib/iam";
-import { Resource }                      from "@cdktf/provider-null/lib/resource";
+import { CloudwatchLogGroup }            from "@cdktf/provider-aws/lib/cloudwatch/index.js";
+import { EcsCluster, EcsTaskDefinition } from "@cdktf/provider-aws/lib/ecs/index.js";
+import { IamRole }                       from "@cdktf/provider-aws/lib/iam/index.js";
+import { Resource }                      from "@cdktf/provider-null/lib/resource.js";
 import { Construct }                     from "constructs";
 
 class Cluster extends Resource {

@@ -1,4 +1,4 @@
-function * Enumeration(_: any, initial = 0) {
+function * Enumeration(_: Iterable<number>, initial = 0) {
     let $;
 
     $ = initial;
@@ -6,10 +6,11 @@ function * Enumeration(_: any, initial = 0) {
     for (const i of _) yield [$++, i];
 }
 
-const initialize = (array: any) => {
+const initialize = (array: Iterable<number>) => {
     const Mapping = {};
 
     for (const [i, idx] of Enumeration(array)) {
+        /// @ts-ignore
         Mapping[i] = idx;
     }
 

@@ -3,15 +3,16 @@ import * as Null from "@cdktf/provider-null";
 import * as Random from "@cdktf/provider-random";
 import * as Docker from "@cdktf/provider-docker";
 
-export * from "./configuration";
-export * from "./credentials";
-export * from "./constructs";
-export * from "./secrets";
-export * from "./secrets-manager";
-export * from "./tags";
-export * from "./resource";
-export * from "./backend";
-export * from "./errors";
-export * from "./utility";
+export * from "./configuration.js";
+export * from "./credentials.js";
+export * from "./constructs/index.js";
+export * from "./secrets.js";
+export * from "./secrets-manager.js";
+export * from "./tags.js";
+export * from "./resource.js";
+
+export * from "./backend/index.js";
+export * from "./errors/index.js";
+export * from "./utility/index.js";
 
 export { AWS, Null, Docker, Random };

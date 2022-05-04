@@ -10,7 +10,7 @@ class CDKTF extends Raw {
      */
 
     constructor() {
-        super( import.meta.url, "json", null );
+        super( import.meta.url /* __filename */, "json", null );
     }
 
     /***
@@ -24,4 +24,6 @@ class CDKTF extends Raw {
 
 export { CDKTF };
 
-export default CDKTF;
+export default { CDKTF };
+
+/// module.exports = { CDKTF };

@@ -1,9 +1,8 @@
-import { EcsCluster, EcsService, EcsTaskDefinition }     from "@cdktf/provider-aws/lib/ecs";
-import { Lb, LbListener, LbListenerRule, LbTargetGroup } from "@cdktf/provider-aws/lib/elb";
-import { SecurityGroup }                                 from "@cdktf/provider-aws/lib/vpc";
-import { Fn, Resource }   from "cdktf";
-import { Construct }      from "constructs";
-import { Vpc }            from "..";
+import { EcsCluster, EcsService, EcsTaskDefinition }     from "@cdktf/provider-aws/lib/ecs/index.js";
+import { Lb, LbListener, LbListenerRule, LbTargetGroup } from "@cdktf/provider-aws/lib/elb/index.js";
+import { Vpc, SecurityGroup }                            from "@cdktf/provider-aws/lib/vpc/index.js";
+import { Fn, Resource }                                  from "cdktf";
+import { Construct }                                     from "constructs";
 
 class LB extends Resource {
     lb: Lb;
@@ -11,22 +10,22 @@ class LB extends Resource {
     vpc: Vpc;
     cluster: EcsCluster;
 
-    constructor(scope: Construct, name: string, vpc: Vpc, cluster: EcsCluster) {
-        super(scope, name);
+    constructor( scope: Construct, name: string, vpc: Vpc, cluster: EcsCluster ) {
+        super( scope, name );
         this.vpc = vpc;
         this.cluster = cluster;
 
-        const lbSecurityGroup = new SecurityGroup(this, `lb-security-group`, {
-            vpcId: Fn.tostring(vpc.vpcIdOutput),
+        const lbSecurityGroup = new SecurityGroup( this, `lb-security-group`, {
+            vpcId: Fn.tostring( vpc.id ),
             ingress: [
                 // allow HTTP traffic from everywhere
                 {
                     protocol: "TCP",
                     fromPort: 80,
                     toPort: 80,
-                    cidrBlocks: ["0.0.0.0/0"],
-                    ipv6CidrBlocks: ["::/0"],
-                },
+                    cidrBlocks: [ "0.0.0.0/0" ],
+                    ipv6CidrBlocks: [ "::/0" ]
+                }
             ],
             egress: [
                 // allow all traffic to every destination
@@ -34,24 +33,24 @@ class LB extends Resource {
                     fromPort: 0,
                     toPort: 0,
                     protocol: "-1",
-                    cidrBlocks: ["0.0.0.0/0"],
-                    ipv6CidrBlocks: ["::/0"],
-                },
-            ],
-        });
-        this.lb = new Lb(this, `lb`, {
+                    cidrBlocks: [ "0.0.0.0/0" ],
+                    ipv6CidrBlocks: [ "::/0" ]
+                }
+            ]
+        } );
+        this.lb = new Lb( this, `lb`, {
             name,
             // we want this to be our public load balancer so that cloudfront can access it
             internal: false,
             loadBalancerType: "application",
-            securityGroups: [lbSecurityGroup.id],
-        });
+            securityGroups: [ lbSecurityGroup.id ]
+        } );
 
         // This is necessary due to a shortcoming in our token system to be adressed in
         // https://github.com/hashicorp/terraform-cdk/issues/651
-        this.lb.addOverride("subnets", vpc.publicSubnetsOutput);
+        this.lb.addOverride( "subnets", vpc.cidrBlock );
 
-        this.lbl = new LbListener(this, `lb-listener`, {
+        this.lbl = new LbListener( this, `lb-listener`, {
             loadBalancerArn: this.lb.arn,
             port: 80,
             protocol: "HTTP",
@@ -62,11 +61,11 @@ class LB extends Resource {
                     fixedResponse: {
                         contentType: "text/plain",
                         statusCode: "404",
-                        messageBody: "Could not find the resource you are looking for",
-                    },
-                },
-            ],
-        });
+                        messageBody: "Could not find the resource you are looking for"
+                    }
+                }
+            ]
+        } );
     }
 
     exposeService(
@@ -76,58 +75,58 @@ class LB extends Resource {
         path: string
     ) {
         // Define Load Balancer target group with a health check on /ready
-        const targetGroup = new LbTargetGroup(this, `target-group`, {
-            dependsOn: [this.lbl],
-            name: `${name}-target-group`,
+        const targetGroup = new LbTargetGroup( this, `target-group`, {
+            dependsOn: [ this.lbl ],
+            name: `${ name }-target-group`,
             port: 80,
             protocol: "HTTP",
             targetType: "ip",
-            vpcId: Fn.tostring(this.vpc.vpcIdOutput),
+            vpcId: Fn.tostring( this.vpc.id ),
             healthCheck: {
                 enabled: true,
-                path: "/ready",
-            },
-        });
+                path: "/ready"
+            }
+        } );
 
         // Makes the listener forward requests from subpath to the target group
-        new LbListenerRule(this, `rule`, {
+        new LbListenerRule( this, `rule`, {
             listenerArn: this.lbl.arn,
             priority: 100,
             action: [
                 {
                     type: "forward",
-                    targetGroupArn: targetGroup.arn,
-                },
+                    targetGroupArn: targetGroup.arn
+                }
             ],
 
             condition: [
                 {
-                    pathPattern: { values: [`${path}*`] },
-                },
-            ],
-        });
+                    pathPattern: { values: [ `${ path }*` ] }
+                }
+            ]
+        } );
 
         // Ensure the task is running and wired to the target group, within the right security group
-        new EcsService(this, `service`, {
-            dependsOn: [this.lbl],
+        new EcsService( this, `service`, {
+            dependsOn: [ this.lbl ],
             name,
             launchType: "FARGATE",
             cluster: this.cluster.id,
             desiredCount: 1,
             taskDefinition: task.arn,
             networkConfiguration: {
-                subnets: Fn.tolist(this.vpc.publicSubnetsOutput),
+                subnets: Fn.tolist( this.vpc.cidrBlock ),
                 assignPublicIp: true,
-                securityGroups: [serviceSecurityGroup.id],
+                securityGroups: [ serviceSecurityGroup.id ]
             },
             loadBalancer: [
                 {
                     containerPort: 80,
                     containerName: name,
-                    targetGroupArn: targetGroup.arn,
-                },
-            ],
-        });
+                    targetGroupArn: targetGroup.arn
+                }
+            ]
+        } );
     }
 }
 
